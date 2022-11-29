@@ -1,0 +1,8 @@
+{
+  "name": "Travel Buddy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "6fca4985"
+}

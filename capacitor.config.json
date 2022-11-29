@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Travel Buddy",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
