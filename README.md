@@ -45,6 +45,13 @@ Die Travel Buddy App wurde im Rahmen des Software Engineering 2 Vorlesung erstel
   - Wird UI auf Apple Geräten richtig geändert?
 
 - Zusatzfeatures
-  - Darkmode -> Einstellungen
   - Navigation in Navigationsapp starten
-  - Auswählen der NavigationsApp (Google Maps, Safari Maps) -> Einstellungen
+
+Aufgaben Zusatzfeatures:
+- Einstellungsmenü
+  - Durch Button Einblenden
+  - Speichern der Einstellungen in local Storage
+  - Auslesen der Einstellungen beim Appstart
+  - Darkmode 
+  - Auswählen der NavigationsApp (Google Maps, Safari Maps)
+  - Sprache
