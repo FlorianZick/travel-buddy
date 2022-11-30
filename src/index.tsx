@@ -5,7 +5,14 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { setupIonicReact } from "@ionic/react";
 
-function iOS() {
+// enum for the component mode
+enum Mode {
+  IOS = "ios",
+  MD = "md",
+}
+
+// checks if the device is an apple device
+function isAppleDevice(): boolean {
   return (
     [
       "iPad Simulator",
@@ -20,10 +27,18 @@ function iOS() {
   );
 }
 
-const mode = iOS() ? "ios" : "md";
+// returns the mode based on the device
+function detectMode(): Mode {
+  if (isAppleDevice()) {
+    return Mode.IOS;
+  } else {
+    return Mode.MD;
+  }
+}
 
+// sets the mode
 setupIonicReact({
-  mode: mode,
+  mode: detectMode(),
 });
 
 const container = document.getElementById("root");
