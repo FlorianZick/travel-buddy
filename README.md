@@ -2,7 +2,24 @@
 ## Beschreibung
 Die Travel Buddy App wurde im Rahmen des Software Engineering 2 Vorlesung erstellt. Die PWA kann Informationen zu Örtlichkeiten anzeigen
 
-## Aufgaben
+##Agiles Board - Jira
+https://webeng2.atlassian.net/jira/software/projects/WEB/boards/1/backlog
+
+## Vorgaben zur Zusammenarbeit
+- alles in Bezug auf das Projekt (außer Jira) in Englisch
+- Jeder erstellt sich pro Story einen neuen Branch mit seinen Initialen als Namen und sinvoller englischer Beschreibung: Bsp. SF_Beschreibung
+- wenn Nötig: Story in Tasks runterbrechen, mit Steffen abstimmen
+- Kommentieren des Programmcodes in Englisch (inkl. JsDoc)
+- lowerCamelCase
+- sinnvolle Variablen, Funktionen, Klassenbenennungen (Englisch)
+- sinnvolle englische Commit-Messages
+- Wenn fertig:
+	- Quellcode autoformatieren, dann pushen
+	- Mitteilung an EINE Person, die Pull-Requests erstellt
+	- Direkt!!! verschieben der Story auf Done
+
+## Aufgaben veraltet - siehe Jira, das gilt!!!
+
 - Einbinden der Leaflet-React Komponente in die App
   - Karte lädt schnell und rendert richtig ohne Anzeige Fehler
   - Karte ist reponsiv
