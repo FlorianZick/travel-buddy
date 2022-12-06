@@ -12,16 +12,31 @@ import {
     IonIcon,
 } from "@ionic/react";
 import { locationOutline } from "ionicons/icons";
+import "typeface-roboto";
 import "./sheetModal.css";
 
 function SheetModal() {
     const modal = React.useRef(null);
     return (
         <div>
-            <IonFab slot="fixed">
+            <IonFab slot="fixed" class="infoBtn">
                 <IonFabButton id="open-modal">
                     <IonIcon icon={locationOutline}></IonIcon>
                 </IonFabButton>
+            </IonFab>
+            <IonFab slot="fixed" class="nameTag">
+                <IonText color="dark">
+                    <h1
+                        style={{
+                            margin: 0,
+                            fontWeight: 700,
+                            fontSize: "2rem",
+                            fontFamily: "Roboto, sans-serif",
+                        }}
+                    >
+                        Travel Buddy
+                    </h1>
+                </IonText>
             </IonFab>
             <IonModal
                 ref={modal}
