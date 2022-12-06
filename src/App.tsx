@@ -1,7 +1,5 @@
-import { IonApp, setupIonicReact, IonButton } from "@ionic/react";
-
-import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
-import { locationOutline } from "ionicons/icons";
+import * as React from "react";
+import { IonApp, setupIonicReact } from "@ionic/react";
 
 import Map from "./components/Map";
 import SheetModal from "./components/SheetModal";
@@ -28,15 +26,11 @@ import "./theme/variables.css";
 setupIonicReact();
 
 const App: React.FC = () => (
-  <IonApp>
-    <Map />
-    <IonFab>
-      <IonFabButton>
-        <IonIcon icon={locationOutline}></IonIcon>
-      </IonFabButton>
-    </IonFab>
-    <SheetModal />
-  </IonApp>
+    <IonApp>
+        <Map>
+            <SheetModal />
+        </Map>
+    </IonApp>
 );
 
 export default App;
