@@ -48,13 +48,9 @@ const App: React.FC = (): ReactElement => {
 
   return (
     <IonApp>
-      <Map />
-      <IonFab>
-        <IonFabButton>
-          <IonIcon icon={locationOutline}></IonIcon>
-        </IonFabButton>
-      </IonFab>
-      <SheetModal />
+      <Map>
+        <SheetModal />
+      </Map>
     </IonApp>
   );
 };
