@@ -36,8 +36,8 @@ export async function fetchWikiData(term: string): Promise<WikiApiDataModel[]> {
       for (let i in searchResults) {
         let search = searchResults[i];
         wikiSearchResults.push({
-          queryResultPageTitle: search.title,
-          queryResultPageSnippet: search.snippet.replace(/<\/?[^>]+(>|$)/g, ""), // remove html tags from the snippet
+          title: search.title,
+          snippet: search.snippet.replace(/<\/?[^>]+(>|$)/g, ""), // remove html tags from the snippet
         });
       }
     });

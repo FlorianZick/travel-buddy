@@ -43,6 +43,15 @@ const App: React.FC = (): ReactElement => {
 
   const getWikiData = async (title: string) => {
     const data = await fetchWikiData(title);
+    // print data
+
+    data.map((item, i) => {
+      console.log("item ", i);
+      console.log("title ", item.title);
+      console.log("description ", item.snippet);
+      console.log("\n");
+    });
+
     setLocationInfo(data);
   };
 
