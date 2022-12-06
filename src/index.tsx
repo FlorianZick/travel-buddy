@@ -5,6 +5,15 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { setupIonicReact } from "@ionic/react";
 
+import ConfigsProvider from "./components/ConfigContext/ConfigContext";
+import {
+  Config,
+  DeviceType,
+  Language,
+  NavigatorApp,
+  Theme,
+} from "./components/ConfigContext/types";
+
 // enum for the component mode
 enum Mode {
   IOS = "ios",
@@ -41,11 +50,20 @@ setupIonicReact({
   mode: detectMode(),
 });
 
+const configData: Config = {
+  theme: Theme.LIGHT,
+  device: DeviceType.MOBILE,
+  language: Language.EN,
+  navigator: NavigatorApp.GOOGLE_MAPS,
+};
+
 const container = document.getElementById("root");
 const root = createRoot(container!);
 root.render(
   <React.StrictMode>
-    <App />
+    <ConfigsProvider configJson={configData}>
+      <App />
+    </ConfigsProvider>
   </React.StrictMode>
 );
 

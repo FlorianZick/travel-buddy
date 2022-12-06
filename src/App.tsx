@@ -1,7 +1,13 @@
-import { IonApp, setupIonicReact } from "@ionic/react";
-
-import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
-import { locationOutline } from "ionicons/icons";
+import {
+  IonApp,
+  IonButtons,
+  IonHeader,
+  IonMenuButton,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  setupIonicReact,
+} from "@ionic/react";
 
 import Map from "./components/Map";
 import SheetModal from "./components/SheetModal";
@@ -28,6 +34,8 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import React, { ReactElement, useEffect, useState } from "react";
 import { WikiApiDataModel } from "./models/wikiApiDataModel";
+import Settings from "./components/settings";
+import Header from "./components/header";
 
 setupIonicReact();
 
@@ -45,21 +53,26 @@ const App: React.FC = (): ReactElement => {
     const data = await fetchWikiData(title);
     // print data
 
+    /*
     data.map((item, i) => {
       console.log("item ", i);
       console.log("title ", item.title);
       console.log("description ", item.snippet);
       console.log("\n");
     });
-
+*/
     setLocationInfo(data);
   };
 
   return (
     <IonApp>
-      <Map>
-        <SheetModal />
-      </Map>
+      <IonPage id="main-content">
+        <Header />
+        <Settings />
+        <Map>
+          <SheetModal />
+        </Map>
+      </IonPage>
     </IonApp>
   );
 };
