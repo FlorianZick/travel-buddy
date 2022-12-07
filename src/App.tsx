@@ -1,13 +1,4 @@
-import {
-  IonApp,
-  IonButtons,
-  IonHeader,
-  IonMenuButton,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  setupIonicReact,
-} from "@ionic/react";
+import { IonApp, setupIonicReact } from "@ionic/react";
 
 import Map from "./components/Map";
 import SheetModal from "./components/SheetModal";
@@ -30,12 +21,13 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
+import "./global.css";
+
 /* Theme variables */
 import "./theme/variables.css";
 import React, { ReactElement, useEffect, useState } from "react";
 import { WikiApiDataModel } from "./models/wikiApiDataModel";
-import Settings from "./components/settings";
-import Header from "./components/header";
+import Menu from "./components/menu";
 
 setupIonicReact();
 
@@ -66,13 +58,10 @@ const App: React.FC = (): ReactElement => {
 
   return (
     <IonApp>
-      <IonPage id="main-content">
-        <Header />
-        <Settings />
-        <Map>
-          <SheetModal />
-        </Map>
-      </IonPage>
+      <Map>
+        <Menu />
+        <SheetModal />
+      </Map>
     </IonApp>
   );
 };

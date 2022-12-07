@@ -42,6 +42,7 @@ function Map(props: any) {
       zoom={13}
       style={{ width: "100%", height: "100vh" }}
       dragging={true}
+      zoomControl={false}
     >
       <TileLayer
         attribution=""
