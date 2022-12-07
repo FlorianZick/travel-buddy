@@ -1,4 +1,4 @@
-import React, { createContext, useState, FC, ReactElement } from "react";
+import { createContext, useState, FC, ReactElement, useEffect } from "react";
 import {
   Config,
   ConfigContextState,
@@ -14,6 +14,7 @@ const contextDefaultValues: ConfigContextState = {
     language: Language.EN,
     navigator: NavigatorApp.GOOGLE_MAPS,
   },
+  setConfigs: () => undefined,
 };
 
 export const ConfigContext =
@@ -25,8 +26,13 @@ type ProviderPorps = {
 const ConfigsProvider: FC<ProviderPorps> = (props) => {
   const [configs, setConfigs] = useState<Config>(props.configJson);
 
+  useEffect(() => {
+    // write to local storage
+    localStorage.setItem("configs", JSON.stringify(configs));
+  }, [configs]);
+
   return (
-    <ConfigContext.Provider value={{ configs }}>
+    <ConfigContext.Provider value={{ configs, setConfigs }}>
       {props.children}
     </ConfigContext.Provider>
   );

@@ -5,7 +5,7 @@ import { NavigatorApp } from "./../../ConfigContext/types";
 import { ConfigContext } from "./../../ConfigContext/ConfigContext";
 
 const NavigatorAppSetting: React.FC = (): ReactElement => {
-  const { configs } = useContext(ConfigContext);
+  const { configs, setConfigs } = useContext(ConfigContext);
 
   return (
     <IonItem>
@@ -14,6 +14,7 @@ const NavigatorAppSetting: React.FC = (): ReactElement => {
         placeholder={configs.navigator}
         onIonChange={(e) => {
           configs.navigator = e.detail.value;
+          setConfigs({ ...configs });
         }}
       >
         {Object.keys(NavigatorApp).map((key) => {

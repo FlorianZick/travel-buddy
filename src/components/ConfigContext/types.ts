@@ -1,5 +1,6 @@
 export type ConfigContextState = {
   configs: Config;
+  setConfigs: (configs: Config) => void;
 };
 
 export enum Language {

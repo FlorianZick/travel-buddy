@@ -50,12 +50,8 @@ setupIonicReact({
   mode: detectMode(),
 });
 
-const configData: Config = {
-  theme: Theme.LIGHT,
-  device: DeviceType.MOBILE,
-  language: Language.EN,
-  navigator: NavigatorApp.GOOGLE_MAPS,
-};
+// read config data from local storage
+const configData: Config = JSON.parse(localStorage.getItem("configs")!);
 
 const container = document.getElementById("root");
 const root = createRoot(container!);

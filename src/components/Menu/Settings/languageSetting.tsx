@@ -5,14 +5,17 @@ import { Language } from "./../../ConfigContext/types";
 import { ConfigContext } from "./../../ConfigContext/ConfigContext";
 
 const LanguageSetting: React.FC = (): ReactElement => {
-  const { configs } = useContext(ConfigContext);
+  const { configs, setConfigs } = useContext(ConfigContext);
 
   return (
     <IonItem>
       <IonLabel>Language</IonLabel>
       <IonSelect
         placeholder={configs.language}
-        onIonChange={(e) => (configs.language = e.detail.value)}
+        onIonChange={(e) => {
+          configs.language = e.detail.value;
+          setConfigs({ ...configs });
+        }}
       >
         {Object.keys(Language).map((key) => {
           return (
