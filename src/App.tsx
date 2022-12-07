@@ -39,8 +39,8 @@ const App: React.FC = (): ReactElement => {
 
   // for developement use: fetch london data on start, (fetch geo data)
   useEffect(() => {
-    getWikiData("London");
-    //getGeoAddressData("50637692");
+    //getWikiData("London");
+    getGeoAddressData(51.166, 10.452);
   }, []);
 
   const getWikiData = async (title: string) => {
@@ -57,8 +57,8 @@ const App: React.FC = (): ReactElement => {
     setLocationInfo(data);
   };
 
-  const getGeoAddressData = async (way: string) => {
-    const data = await reverseGeoEncoding(way);
+  const getGeoAddressData = async (lat: number, lon: number) => {
+    const data = await reverseGeoEncoding(lat, lon);
     console.log("App geo data:", data);
   }
 

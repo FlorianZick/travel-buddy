@@ -5,10 +5,10 @@ import { NominatimAddressModel } from "../models/nominatimAddressModel";
  * @param {string} way - Map coordinates format "way", e.g. 50637691
  * @returns NominatimAddressModel - Address as Object
  */
-export async function reverseGeoEncoding(way: string): Promise<NominatimAddressModel> {
+export async function reverseGeoEncoding(lat: number, lon: number): Promise<NominatimAddressModel> {
     
   // Coordinate types: node(N), way(W), relation(R).
-  let url:string = `https://nominatim.openstreetmap.org/lookup?osm_ids=W${way}&format=json`;
+  let url:string = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`
   let addressResult: NominatimAddressModel = {} as NominatimAddressModel;
 
   // fetch data from nominatim API
@@ -19,15 +19,15 @@ export async function reverseGeoEncoding(way: string): Promise<NominatimAddressM
 
     // extract data
     .then((response) => {
-
+      
       // catch error
-      if ((response.length < 1) || (response[0].address === undefined)) {
+      if (response.address === undefined) {
         console.log("Error: No address found!");
         return;
       }
 
       // save data
-      let addressResponse = response[0].address;
+      let addressResponse = response.address;
       
       addressResult = {
           road: addressResponse["road"],
