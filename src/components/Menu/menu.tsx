@@ -1,18 +1,19 @@
 import { ReactElement, useState } from "react";
-import "./settings.css";
 import Searchbar from "./Searchbar";
-import Settings from "./settings";
+import Settings from "./Settings/settings";
 import MenuButton from "./menuButton";
 
+import "./menu.css";
+
 const Menu: React.FC = (): ReactElement => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <div>
+    <>
       <Searchbar />
-      <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
+      <MenuButton setIsOpen={setIsOpen} />
       <Settings isOpen={isOpen} setIsOpen={setIsOpen} />
-    </div>
+    </>
   );
 };
 

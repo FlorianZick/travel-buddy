@@ -1,9 +1,8 @@
 import { ReactElement, useContext } from "react";
 import { IonItem, IonLabel, IonSelect, IonSelectOption } from "@ionic/react";
 
-import "./settings.css";
-import { Language, NavigatorApp, Theme } from "./ConfigContext/types";
-import { ConfigContext } from "./ConfigContext/ConfigContext";
+import { Language } from "./../../ConfigContext/types";
+import { ConfigContext } from "./../../ConfigContext/ConfigContext";
 
 const LanguageSetting: React.FC = (): ReactElement => {
   const { configs } = useContext(ConfigContext);

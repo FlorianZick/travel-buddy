@@ -1,8 +1,8 @@
-.setBtn {
+.menuInnerBtn {
   --box-shadow: none;
 }
 
-.settingsBtn {
+.menuBtn {
   top: 0.1rem;
   left: 360px;
 }
@@ -13,7 +13,7 @@
 }
 
 @media (max-width: 800px) {
-  .settingsBtn {
+  .menuBtn {
     top: 0.1rem;
     left: auto;
     right: 0.1rem;

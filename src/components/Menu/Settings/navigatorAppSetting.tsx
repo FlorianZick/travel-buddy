@@ -1,9 +1,8 @@
 import { ReactElement, useContext } from "react";
 import { IonItem, IonLabel, IonSelect, IonSelectOption } from "@ionic/react";
 
-import "./settings.css";
-import { NavigatorApp } from "./ConfigContext/types";
-import { ConfigContext } from "./ConfigContext/ConfigContext";
+import { NavigatorApp } from "./../../ConfigContext/types";
+import { ConfigContext } from "./../../ConfigContext/ConfigContext";
 
 const NavigatorAppSetting: React.FC = (): ReactElement => {
   const { configs } = useContext(ConfigContext);
@@ -15,7 +14,6 @@ const NavigatorAppSetting: React.FC = (): ReactElement => {
         placeholder={configs.navigator}
         onIonChange={(e) => {
           configs.navigator = e.detail.value;
-          // set selected value of select
         }}
       >
         {Object.keys(NavigatorApp).map((key) => {

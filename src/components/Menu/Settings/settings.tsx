@@ -8,7 +8,6 @@ import {
   IonTitle,
 } from "@ionic/react";
 
-import "./settings.css";
 import SettingsContent from "./settingsContent";
 
 // interface for props

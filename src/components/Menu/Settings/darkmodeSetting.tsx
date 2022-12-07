@@ -1,11 +1,8 @@
 import { ReactElement, useContext } from "react";
 import { IonItem, IonLabel, IonToggle } from "@ionic/react";
 
-import "./settings.css";
-import { Theme } from "./ConfigContext/types";
-import { ConfigContext } from "./ConfigContext/ConfigContext";
-
-// interface for props
+import { Theme } from "./../../ConfigContext/types";
+import { ConfigContext } from "./../../ConfigContext/ConfigContext";
 
 const DarkModeSetting: React.FC = (): ReactElement => {
   const { configs } = useContext(ConfigContext);

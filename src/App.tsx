@@ -1,7 +1,7 @@
 import { IonApp, setupIonicReact } from "@ionic/react";
 
 import Map from "./components/Map";
-import SheetModal from "./components/SheetModal";
+import SheetModal from "./components/SheetModal/SheetModal";
 
 import { fetchWikiData } from "./api/fetchWikiData";
 
@@ -27,7 +27,7 @@ import "./global.css";
 import "./theme/variables.css";
 import React, { ReactElement, useEffect, useState } from "react";
 import { WikiApiDataModel } from "./models/wikiApiDataModel";
-import Menu from "./components/menu";
+import Menu from "./components/Menu/menu";
 
 setupIonicReact();
 
