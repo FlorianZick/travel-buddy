@@ -7,6 +7,7 @@ import Map from "./components/Map";
 import SheetModal from "./components/SheetModal";
 
 import { fetchWikiData } from "./api/fetchWikiData";
+import { reverseGeoEncoding } from "./api/reverseGeoEncoding";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -36,9 +37,10 @@ const App: React.FC = (): ReactElement => {
     null
   );
 
-  // for developement use: fetch london data on start
+  // for developement use: fetch london data on start, (fetch geo data)
   useEffect(() => {
-    getWikiData("London");
+    //getWikiData("London");
+    getGeoAddressData(51.166, 10.452);
   }, []);
 
   const getWikiData = async (title: string) => {
@@ -54,6 +56,11 @@ const App: React.FC = (): ReactElement => {
 
     setLocationInfo(data);
   };
+
+  const getGeoAddressData = async (lat: number, lon: number) => {
+    const data = await reverseGeoEncoding(lat, lon);
+    console.log("App geo data:", data);
+  }
 
   return (
     <IonApp>
