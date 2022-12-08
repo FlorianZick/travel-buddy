@@ -3,8 +3,8 @@
 }
 
 .menuBtn {
-  top: 0.1rem;
-  left: 360px;
+  top: 0.2rem;
+  left: 355px;
 }
 .searchBar {
   top: 0.1rem;
@@ -14,9 +14,8 @@
 
 @media (max-width: 800px) {
   .menuBtn {
-    top: 0.1rem;
     left: auto;
-    right: 0.1rem;
+    right: 0.4rem;
   }
   .searchBar {
     top: 0.1rem;

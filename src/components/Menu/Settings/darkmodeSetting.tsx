@@ -1,5 +1,11 @@
 import { ReactElement, useContext, useEffect } from "react";
-import { IonItem, IonLabel, IonToggle } from "@ionic/react";
+import {
+  IonItem,
+  IonLabel,
+  IonSelect,
+  IonSelectOption,
+  IonToggle,
+} from "@ionic/react";
 
 import { Theme } from "./../../ConfigContext/types";
 import { ConfigContext } from "./../../ConfigContext/ConfigContext";
@@ -10,13 +16,21 @@ const DarkModeSetting: React.FC = (): ReactElement => {
   return (
     <IonItem>
       <IonLabel>Darkmode</IonLabel>
-      <IonToggle
-        checked={configs.theme === Theme.DARK}
+      <IonSelect
+        selectedText={configs.theme}
         onIonChange={(e) => {
-          configs.theme = e.detail.checked ? Theme.DARK : Theme.LIGHT;
+          configs.theme = e.detail.value;
           setConfigs({ ...configs });
         }}
-      />
+      >
+        {Object.values(Theme).map((value, i) => {
+          return (
+            <IonSelectOption key={i} value={value}>
+              {value}
+            </IonSelectOption>
+          );
+        })}
+      </IonSelect>
     </IonItem>
   );
 };

@@ -11,16 +11,16 @@ const LanguageSetting: React.FC = (): ReactElement => {
     <IonItem>
       <IonLabel>Language</IonLabel>
       <IonSelect
-        placeholder={configs.language}
+        selectedText={configs.language}
         onIonChange={(e) => {
           configs.language = e.detail.value;
           setConfigs({ ...configs });
         }}
       >
-        {Object.keys(Language).map((key) => {
+        {Object.values(Language).map((value, i) => {
           return (
-            <IonSelectOption key={key} value={key}>
-              {key}
+            <IonSelectOption key={i} value={value}>
+              {value}
             </IonSelectOption>
           );
         })}

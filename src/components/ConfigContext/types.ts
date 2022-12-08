@@ -4,23 +4,24 @@ export type ConfigContextState = {
 };
 
 export enum Language {
-  EN = "en",
-  FR = "fr",
-  DE = "de",
-  ES = "es",
-  IT = "it",
-  PT = "pt",
+  EN = "English",
+  FR = "French",
+  DE = "German",
+  ES = "Spanish",
+  IT = "Italian",
+  PT = "Portuguese",
 }
 
 export enum Theme {
-  LIGHT = "light",
-  DARK = "dark",
+  LIGHT = "Light",
+  DARK = "Dark",
+  SYSTEM_SETTING = "System Theme",
 }
 
 export enum NavigatorApp {
-  GOOGLE_MAPS = "google_maps",
-  WAZE = "waze",
-  APPLE_MAPS = "apple_maps",
+  GOOGLE_MAPS = "Google Maps",
+  WAZE = "Waze",
+  APPLE_MAPS = "Apple Maps",
 }
 
 export enum DeviceType {
