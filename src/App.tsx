@@ -5,6 +5,7 @@ import { locationOutline } from "ionicons/icons";
 
 import Map from "./components/Map";
 import SheetModal from "./components/SheetModal";
+import Eventcard from "./components/Card";
 
 import { fetchWikiData } from "./api/fetchWikiData";
 
@@ -40,9 +41,9 @@ const App: React.FC = (): ReactElement => {
   useEffect(() => {
     getWikiData("London");
   }, []);
-
+  let data: WikiApiDataModel[] = [];
   const getWikiData = async (title: string) => {
-    const data = await fetchWikiData(title);
+    data = await fetchWikiData(title);
     // print data
 
     data.map((item, i) => {
@@ -58,7 +59,7 @@ const App: React.FC = (): ReactElement => {
   return (
     <IonApp>
       <Map>
-        <SheetModal />
+        <SheetModal data={locationInfo}/>
       </Map>
     </IonApp>
   );
