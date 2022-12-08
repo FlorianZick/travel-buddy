@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  IonButton,
   IonModal,
   IonContent,
   IonList,
@@ -10,15 +9,13 @@ import {
   IonFab,
   IonFabButton,
   IonIcon,
-  IonRow,
-  IonGrid,
-  IonCard,
 } from "@ionic/react";
-import { locationOutline, navigateCircleOutline } from "ionicons/icons";
+import { locationOutline } from "ionicons/icons";
 import "typeface-roboto";
 import "./sheetModal.css";
 import Eventcard from "../Card";
 import { WikiApiDataModel } from "../../models/wikiApiDataModel";
+import Header from "./header";
 
 interface Props {
   data: WikiApiDataModel[] | null;
@@ -55,26 +52,7 @@ const SheetModal: React.FC<Props> = ({ data }): React.ReactElement => {
       >
         <IonContent className="ion-padding">
           <IonList>
-            <IonItem>
-              <IonGrid style={{ marginBottom: "4rem" }}>
-                <IonRow
-                  className="ion-justify-content-center ion-align-items-center"
-                  style={{ marginBottom: "0.5rem" }}
-                >
-                  <IonText style={{ fontSize: "1.3rem", fontWeight: 450 }}>
-                    {data?.at(0)?.title}
-                  </IonText>
-                </IonRow>
-
-                <IonRow style={{ justifyContent: "center" }}>
-                  <IonFab>
-                    <IonFabButton>
-                      <IonIcon icon={navigateCircleOutline}></IonIcon>
-                    </IonFabButton>
-                  </IonFab>
-                </IonRow>
-              </IonGrid>
-            </IonItem>
+            <Header title={data?.at(0)?.title} />
             {data?.map((item, i) => (
               <IonItem key={i}>
                 <IonLabel>
