@@ -7,15 +7,15 @@ import {
   IonToggle,
 } from "@ionic/react";
 
-import { Theme } from "./../../ConfigContext/types";
-import { ConfigContext } from "./../../ConfigContext/ConfigContext";
+import { Theme } from "../../ConfigContext/types";
+import { ConfigContext } from "../../ConfigContext/ConfigContext";
 
 const DarkModeSetting: React.FC = (): ReactElement => {
   const { configs, setConfigs } = useContext(ConfigContext);
 
   return (
     <IonItem>
-      <IonLabel>Darkmode</IonLabel>
+      <IonLabel>Theme</IonLabel>
       <IonSelect
         selectedText={configs.theme}
         onIonChange={(e) => {

@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { IonContent, IonList } from "@ionic/react";
 
-import DarkModeSetting from "./darkmodeSetting";
+import DarkModeSetting from "./themeSetting";
 import LanguageSetting from "./languageSetting";
 import NavigatorAppSetting from "./navigatorAppSetting";
 
