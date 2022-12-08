@@ -52,7 +52,7 @@ const SheetModal: React.FC<Props> = ({ data }): React.ReactElement => {
                 breakpoints={[0, 0.25, 0.5, 1]}
             >
                 <IonContent className="ion-padding">
-                    <IonText>Informationen über Friedrichshafen</IonText>
+                    <IonText>Informationen</IonText>
                     <IonButton>Route</IonButton>
                     <IonList>
                         {data?.map((item, i) => (
