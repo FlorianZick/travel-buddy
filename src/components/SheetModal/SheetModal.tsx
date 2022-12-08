@@ -14,8 +14,15 @@ import {
 import { locationOutline } from "ionicons/icons";
 import "typeface-roboto";
 import "./sheetModal.css";
+import Eventcard from "../Card";
+import { WikiApiDataModel } from "../../models/wikiApiDataModel";
 
-function SheetModal() {
+interface Props {
+    data: WikiApiDataModel[] | null;
+    
+  }
+
+const SheetModal: React.FC<Props> = ({ data }): React.ReactElement => {
     const modal = React.useRef(null);
     return (
         <div>
@@ -45,14 +52,13 @@ function SheetModal() {
                 breakpoints={[0, 0.25, 0.5, 1]}
             >
                 <IonContent className="ion-padding">
-                    <IonText>Informationen über Friedrichshafen</IonText>
+                    <IonText>Informationen</IonText>
                     <IonButton>Route</IonButton>
                     <IonList>
-                        {Array.from({ length: 10 }).map((_, i) => (
-                            <IonItem key={i + 1}>
+                        {data?.map((item, i) => (
+                            <IonItem key={i}>
                                 <IonLabel>
-                                    <h2>Sehenswürdigkeit {i + 1}</h2>
-                                    <p>Infos zu {i + 1} </p>
+                                    <Eventcard title={item.title} snippet={item.snippet}/>
                                 </IonLabel>
                             </IonItem>
                         ))}

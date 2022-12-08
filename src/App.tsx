@@ -39,12 +39,12 @@ const App: React.FC = (): ReactElement => {
 
   // for developement use: fetch london data on start, (fetch geo data)
   useEffect(() => {
-    //getWikiData("London");
+    getWikiData("London");
     getGeoAddressData(51.166, 10.452);
   }, []);
-
+  let data: WikiApiDataModel[] = [];
   const getWikiData = async (title: string) => {
-    const data = await fetchWikiData(title);
+    data = await fetchWikiData(title);
     // print data
 
     /*
@@ -67,7 +67,7 @@ const App: React.FC = (): ReactElement => {
     <IonApp>
       <Map>
         <Menu />
-        <SheetModal />
+        <SheetModal data={locationInfo}/>
       </Map>
     </IonApp>
   );
