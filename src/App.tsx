@@ -33,21 +33,21 @@ import Menu from "./components/Menu/menu";
 setupIonicReact();
 
 const App: React.FC = (): ReactElement => {
-  const [locationInfo, setLocationInfo] = useState<WikiApiDataModel[] | null>(
-    null
-  );
+    const [locationInfo, setLocationInfo] = useState<WikiApiDataModel[] | null>(
+        null
+    );
 
-  // for developement use: fetch london data on start, (fetch geo data)
-  useEffect(() => {
-    getWikiData("London");
-    getGeoAddressData(51.166, 10.452);
-  }, []);
-  let data: WikiApiDataModel[] = [];
-  const getWikiData = async (title: string) => {
-    data = await fetchWikiData(title);
-    // print data
+    // for developement use: fetch london data on start, (fetch geo data)
+    useEffect(() => {
+        getWikiData("London");
+        getGeoAddressData(51.166, 10.452);
+    }, []);
+    let data: WikiApiDataModel[] = [];
+    const getWikiData = async (title: string) => {
+        data = await fetchWikiData(title);
+        // print data
 
-    /*
+        /*
     data.map((item, i) => {
       console.log("item ", i);
       console.log("title ", item.title);
@@ -55,22 +55,22 @@ const App: React.FC = (): ReactElement => {
       console.log("\n");
     });
 */
-    setLocationInfo(data);
-  };
+        setLocationInfo(data);
+    };
 
-  const getGeoAddressData = async (lat: number, lon: number) => {
-    const data = await reverseGeoEncoding(lat, lon);
-    console.log("App geo data:", data);
-  }
+    const getGeoAddressData = async (lat: number, lon: number) => {
+        const data = await reverseGeoEncoding(lat, lon);
+        console.log("App geo data:", data);
+    };
 
-  return (
-    <IonApp>
-      <Map>
-        <Menu />
-        <SheetModal data={locationInfo}/>
-      </Map>
-    </IonApp>
-  );
+    return (
+        <IonApp>
+            <Map>
+                <Menu />
+                <SheetModal data={locationInfo} />
+            </Map>
+        </IonApp>
+    );
 };
 
 export default App;
