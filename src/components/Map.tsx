@@ -1,7 +1,9 @@
 import * as React from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import L from "leaflet";
+import L, { LatLng } from "leaflet";
+import { fetchWikiData } from "../api/fetchWikiData";
+import { reverseGeoEncoding } from "../api/reverseGeoEncoding";
 
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -9,10 +11,19 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-function LocationMarker() {
+async function loadLocationData(location: LatLng, setWikiData: any) {
+  const locationData = await reverseGeoEncoding(location.lat, location.lng);
+  console.log(locationData);
+  const wikiData = await fetchWikiData(locationData.city);
+  console.log(wikiData);
+  setWikiData(wikiData)
+}
+
+function LocationMarker(props: any) {
   const [position, setPosition] = React.useState<L.LatLng>();
   const [bbox, setBbox] = React.useState<string[]>([]);
   const map = useMap();
+
   React.useEffect(() => {
     map.locate().on("locationfound", function (e) {
       setPosition(e.latlng);
@@ -21,8 +32,18 @@ function LocationMarker() {
       const circle = L.circle(e.latlng, radius);
       circle.addTo(map);
       setBbox(e.bounds.toBBoxString().split(","));
+      loadLocationData(e.latlng, props.onLocationChange)
     });
   }, [map]);
+
+  React.useEffect(() => {
+    map.on('click', function (e) {
+      setPosition(e.latlng);
+      map.flyTo(e.latlng, map.getZoom());
+      loadLocationData(e.latlng, props.onLocationChange)
+    });
+  }, [map]);
+
   return position === undefined ? null : (
     <Marker position={position}>
       <Popup>
@@ -49,7 +70,7 @@ function Map(props: any) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {props.children}
-      <LocationMarker />
+      <LocationMarker onLocationChange={props.onLocationChange}/>
     </MapContainer>
   );
 }
