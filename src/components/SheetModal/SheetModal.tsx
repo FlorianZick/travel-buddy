@@ -16,6 +16,7 @@ import "./sheetModal.css";
 import Eventcard from "../Card";
 import { WikiApiDataModel } from "../../models/wikiApiDataModel";
 import Header from "./header";
+import L from "leaflet";
 
 interface Props {
   data: WikiApiDataModel[] | null;
@@ -23,8 +24,14 @@ interface Props {
 
 const SheetModal: React.FC<Props> = ({ data }): React.ReactElement => {
   const modal = React.useRef(null);
+
+  React.useEffect(() => {
+    const divRef = document.getElementById("sheetModalDiv")!;
+    L.DomEvent.disableClickPropagation(divRef);
+  });
+
   return (
-    <div>
+    <div id="sheetModalDiv">
       <IonFab slot="fixed" class="infoBtn">
         <IonFabButton id="open-modal">
           <IonIcon icon={locationOutline}></IonIcon>
