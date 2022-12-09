@@ -4,9 +4,11 @@ import "leaflet-routing-machine";
 import "./routingMachine.css";
 declare let L: any;
 
+var routingControl: any;
+
 function createRoutineMachineLayer(props: any) {
     console.log(props.pos1);
-    const instance = L.Routing.control({
+    routingControl = L.Routing.control({
         waypoints: [
             L.latLng(props.pos1.lat, props.pos1.lng),
             L.latLng(props.pos2.lat, props.pos2.lng),
@@ -25,7 +27,14 @@ function createRoutineMachineLayer(props: any) {
         fitSelectedRoutes: true,
         showAlternatives: false,
     });
-    return instance;
+    return routingControl;
+}
+
+export function changePosition(pos1: any) {
+    routingControl.setWaypoints([
+        L.latLng(pos1.lat, pos1.lng),
+        routingControl.options.waypoints[1],
+    ]);
 }
 
 const RoutingMachine = createControlComponent(createRoutineMachineLayer);

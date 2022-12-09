@@ -2,7 +2,7 @@ import * as React from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
-import RoutingMachine from "./RoutingMachine";
+import RoutingMachine, { changePosition } from "./RoutingMachine";
 
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -18,6 +18,7 @@ function Map(props: any) {
             map.locate().on("locationfound", function (e) {
                 setPosition(e.latlng);
                 map.flyTo(e.latlng, map.getZoom());
+                changePosition(e.latlng);
                 const radius = e.accuracy;
                 const circle = L.circle(e.latlng, radius);
                 circle.addTo(map);
