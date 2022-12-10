@@ -29,10 +29,15 @@ export async function reverseGeoEncoding(lat: number, lon: number): Promise<Nomi
       // save data
       let addressResponse = response.address;
       
+      // leaflet differs between city town and village
+      let cityTag = "city";
+      cityTag = addressResponse.hasOwnProperty("town") ? "town" : cityTag;
+      cityTag = addressResponse.hasOwnProperty("village") ? "village" : cityTag;
+
       addressResult = {
           road: addressResponse["road"],
           postcode: addressResponse["postcode"],
-          city: addressResponse["city"],
+          city: addressResponse[cityTag],
           state: addressResponse["state"],
           country: addressResponse["country"]
       };
