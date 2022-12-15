@@ -24,6 +24,8 @@ import "@ionic/react/css/display.css";
 
 import "./global.css";
 
+import "./i18n/config";
+
 /* Theme variables */
 import "./theme/variables.css";
 import React, { ReactElement, useEffect, useState } from "react";
@@ -41,7 +43,7 @@ const App: React.FC = (): ReactElement => {
     <IonApp>
       <Map onLocationChange={setLocationInfo}>
         <Menu />
-        <SheetModal data={locationInfo}/>
+        <SheetModal data={locationInfo} />
       </Map>
     </IonApp>
   );

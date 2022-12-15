@@ -10,6 +10,9 @@ import {
 
 import SettingsContent from "./settingsContent";
 
+import { useTranslation } from "react-i18next";
+import { settings } from "cluster";
+
 // interface for props
 interface Props {
   isOpen: boolean;
@@ -17,13 +20,17 @@ interface Props {
 }
 
 const Settings: React.FC<Props> = ({ isOpen, setIsOpen }): ReactElement => {
+  const { t } = useTranslation();
+
   return (
     <IonModal isOpen={isOpen}>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Settings</IonTitle>
+          <IonTitle>{t("settings.settingsTitle")}</IonTitle>
           <IonButtons slot="end">
-            <IonButton onClick={() => setIsOpen(false)}>Close</IonButton>
+            <IonButton onClick={() => setIsOpen(false)}>
+              {t("settings.close")}
+            </IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>

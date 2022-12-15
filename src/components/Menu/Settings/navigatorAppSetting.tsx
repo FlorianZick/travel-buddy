@@ -4,7 +4,10 @@ import { IonItem, IonLabel, IonSelect, IonSelectOption } from "@ionic/react";
 import { NavigatorApp } from "./../../ConfigContext/types";
 import { ConfigContext } from "./../../ConfigContext/ConfigContext";
 
+import { useTranslation } from "react-i18next";
+
 const NavigatorAppSetting: React.FC = (): ReactElement => {
+  const { t } = useTranslation();
   const { configs, setConfigs } = useContext(ConfigContext);
 
   useEffect(() => {
@@ -13,7 +16,7 @@ const NavigatorAppSetting: React.FC = (): ReactElement => {
 
   return (
     <IonItem>
-      <IonLabel>Navigator App</IonLabel>
+      <IonLabel>{t("settings.navigatorApp")}</IonLabel>
       <IonSelect
         selectedText={configs.navigator}
         onIonChange={(e) => {

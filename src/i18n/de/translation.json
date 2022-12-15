@@ -1,0 +1,9 @@
+{
+  "settings": {
+    "settingsTitle": "Einstellungen",
+    "theme": "Theme",
+    "language": "Sprache",
+    "navigatorApp": "Navigator App",
+    "close": "Schließen"
+  }
+}

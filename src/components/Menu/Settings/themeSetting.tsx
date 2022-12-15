@@ -10,12 +10,15 @@ import {
 import { Theme } from "../../ConfigContext/types";
 import { ConfigContext } from "../../ConfigContext/ConfigContext";
 
+import { useTranslation } from "react-i18next";
+
 const DarkModeSetting: React.FC = (): ReactElement => {
+  const { t } = useTranslation();
   const { configs, setConfigs } = useContext(ConfigContext);
 
   return (
     <IonItem>
-      <IonLabel>Theme</IonLabel>
+      <IonLabel>{t("settings.theme")}</IonLabel>
       <IonSelect
         selectedText={configs.theme}
         onIonChange={(e) => {

@@ -4,12 +4,15 @@ import { IonItem, IonLabel, IonSelect, IonSelectOption } from "@ionic/react";
 import { Language } from "./../../ConfigContext/types";
 import { ConfigContext } from "./../../ConfigContext/ConfigContext";
 
+import { useTranslation } from "react-i18next";
+
 const LanguageSetting: React.FC = (): ReactElement => {
+  const { t } = useTranslation();
   const { configs, setConfigs } = useContext(ConfigContext);
 
   return (
     <IonItem>
-      <IonLabel>Language</IonLabel>
+      <IonLabel>{t("settings.language")}</IonLabel>
       <IonSelect
         selectedText={configs.language}
         onIonChange={(e) => {
