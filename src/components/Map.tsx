@@ -14,18 +14,6 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-async function loadLocationData(
-  location: LatLng,
-  setWikiData: any,
-  lang: Language
-) {
-  const locationData = await reverseGeoEncoding(location.lat, location.lng);
-
-  const wikiData = await fetchWikiData(locationData.city, lang);
-
-  setWikiData(wikiData);
-}
-
 function LocationMarker(props: any) {
   const { configs } = useContext(ConfigContext);
 
@@ -34,11 +22,19 @@ function LocationMarker(props: any) {
   const map = useMap();
 
   React.useEffect(() => {
-    console.log("effekt " + configs.language);
+    // On every language change, remove the old event listeners and add new ones
+    // Callbacks needs to be changed, to make sure the new language is used in the fetchWikiApi call
+    map.locate().removeEventListener("locationfound");
+
+    // Only adds a callback to the event listener and does not replace it
+    map.locate().on("locationfound", mapLocateCallback);
+
+    map.removeEventListener("click");
+    map.on("click", mapClickCallback);
   }, [configs.language]);
 
-  React.useEffect(() => {
-    map.locate().on("locationfound", function (e) {
+  const mapLocateCallback = React.useCallback(
+    (e: any) => {
       setPosition(e.latlng);
       map.flyTo(e.latlng, map.getZoom());
       const radius = e.accuracy;
@@ -46,16 +42,30 @@ function LocationMarker(props: any) {
       circle.addTo(map);
       setBbox(e.bounds.toBBoxString().split(","));
       loadLocationData(e.latlng, props.onLocationChange, configs.language);
-    });
-  }, [map, configs.language]);
+    },
+    [configs.language]
+  );
 
-  React.useEffect(() => {
-    map.on("click", function (e) {
+  const mapClickCallback = React.useCallback(
+    (e: any) => {
       setPosition(e.latlng);
       map.flyTo(e.latlng, map.getZoom());
       loadLocationData(e.latlng, props.onLocationChange, configs.language);
-    });
-  }, [map, configs.language]);
+    },
+    [configs.language]
+  );
+
+  async function loadLocationData(
+    location: LatLng,
+    setWikiData: any,
+    lang: Language
+  ) {
+    const locationData = await reverseGeoEncoding(location.lat, location.lng);
+
+    const wikiData = await fetchWikiData(locationData.city, lang);
+
+    setWikiData(wikiData);
+  }
 
   return position === undefined ? null : (
     <Marker position={position}>

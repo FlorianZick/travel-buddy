@@ -43,7 +43,7 @@ const App: React.FC = (): ReactElement => {
 
   useEffect(() => {
     i18n.changeLanguage(configs.language);
-  }, [configs.language]);
+  }, []);
 
   return (
     <IonApp>

@@ -25,8 +25,7 @@ export async function fetchWikiData(
   term: string,
   lang: Language
 ): Promise<WikiApiDataModel[]> {
-  console.log("lang " + lang);
-
+  console.log("lang, " + lang);
   let languageCode = getLanguageCode(lang);
   let url = "https://" + languageCode + ".wikipedia.org/w/api.php";
 
