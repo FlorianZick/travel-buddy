@@ -7,6 +7,7 @@ import {
   NavigatorApp,
   Theme,
 } from "./types";
+
 const contextDefaultValues: ConfigContextState = {
   configs: {
     theme: Theme.LIGHT,
@@ -19,10 +20,12 @@ const contextDefaultValues: ConfigContextState = {
 
 export const ConfigContext =
   createContext<ConfigContextState>(contextDefaultValues);
+
 type ProviderPorps = {
   configJson: Config;
   children: ReactElement;
 };
+
 const ConfigsProvider: FC<ProviderPorps> = (props) => {
   const [configs, setConfigs] = useState<Config>(props.configJson);
 
