@@ -11,7 +11,6 @@ import {
 import SettingsContent from "./settingsContent";
 
 import { useTranslation } from "react-i18next";
-import { settings } from "cluster";
 
 // interface for props
 interface Props {

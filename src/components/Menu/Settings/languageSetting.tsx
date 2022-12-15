@@ -7,7 +7,7 @@ import { ConfigContext } from "./../../ConfigContext/ConfigContext";
 import { useTranslation } from "react-i18next";
 
 const LanguageSetting: React.FC = (): ReactElement => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { configs, setConfigs } = useContext(ConfigContext);
 
   return (
@@ -18,6 +18,7 @@ const LanguageSetting: React.FC = (): ReactElement => {
         onIonChange={(e) => {
           configs.language = e.detail.value;
           setConfigs({ ...configs });
+          i18n.changeLanguage(e.detail.value);
         }}
       >
         {Object.values(Language).map((value, i) => {

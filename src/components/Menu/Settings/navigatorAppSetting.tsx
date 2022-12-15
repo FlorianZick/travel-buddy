@@ -7,12 +7,8 @@ import { ConfigContext } from "./../../ConfigContext/ConfigContext";
 import { useTranslation } from "react-i18next";
 
 const NavigatorAppSetting: React.FC = (): ReactElement => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { configs, setConfigs } = useContext(ConfigContext);
-
-  useEffect(() => {
-    console.log(configs);
-  }, []);
 
   return (
     <IonItem>
@@ -22,7 +18,9 @@ const NavigatorAppSetting: React.FC = (): ReactElement => {
         onIonChange={(e) => {
           configs.navigator = e.detail.value;
           setConfigs({ ...configs });
+          i18n.changeLanguage(e.detail.value);
         }}
+  
       >
         {Object.values(NavigatorApp).map((value, i) => {
           return (

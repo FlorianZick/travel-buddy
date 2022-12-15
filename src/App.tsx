@@ -3,9 +3,6 @@ import { IonApp, setupIonicReact } from "@ionic/react";
 import Map from "./components/Map";
 import SheetModal from "./components/SheetModal/SheetModal";
 
-import { fetchWikiData } from "./api/fetchWikiData";
-import { reverseGeoEncoding } from "./api/reverseGeoEncoding";
-
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -28,9 +25,11 @@ import "./i18n/config";
 
 /* Theme variables */
 import "./theme/variables.css";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { WikiApiDataModel } from "./models/wikiApiDataModel";
 import Menu from "./components/Menu/menu";
+import { useTranslation } from "react-i18next";
+import { ConfigContext } from "./components/ConfigContext/ConfigContext";
 
 setupIonicReact();
 
@@ -38,6 +37,13 @@ const App: React.FC = (): ReactElement => {
   const [locationInfo, setLocationInfo] = useState<WikiApiDataModel[] | null>(
     null
   );
+
+  const { i18n } = useTranslation();
+  const { configs } = useContext(ConfigContext);
+
+  useEffect(() => {
+    i18n.changeLanguage(configs.language);
+  }, [configs.language]);
 
   return (
     <IonApp>

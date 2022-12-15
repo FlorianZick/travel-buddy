@@ -1,8 +1,34 @@
+import { Language } from "../components/ConfigContext/types";
 import { WikiApiDataModel } from "../models/wikiApiDataModel";
 import { Params, WikiApiResponse } from "./apiTypes";
 
-export async function fetchWikiData(term: string): Promise<WikiApiDataModel[]> {
-  let url = "https://en.wikipedia.org/w/api.php";
+function getLanguageCode(lang: Language) {
+  switch (lang) {
+    case Language.EN:
+      return "en";
+    case Language.DE:
+      return "de";
+    case Language.FR:
+      return "fr";
+    case Language.ES:
+      return "es";
+    case Language.IT:
+      return "it";
+    case Language.PT:
+      return "pt";
+    default:
+      return "en";
+  }
+}
+
+export async function fetchWikiData(
+  term: string,
+  lang: Language
+): Promise<WikiApiDataModel[]> {
+  console.log("lang " + lang);
+
+  let languageCode = getLanguageCode(lang);
+  let url = "https://" + languageCode + ".wikipedia.org/w/api.php";
 
   // parameter for the search query for the wikipedia api
   const params: Params = {

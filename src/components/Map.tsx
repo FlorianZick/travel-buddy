@@ -4,6 +4,9 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L, { LatLng } from "leaflet";
 import { fetchWikiData } from "../api/fetchWikiData";
 import { reverseGeoEncoding } from "../api/reverseGeoEncoding";
+import { ConfigContext } from "./ConfigContext";
+import { useContext } from "react";
+import { Language } from "./ConfigContext/types";
 
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -11,18 +14,28 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-async function loadLocationData(location: LatLng, setWikiData: any) {
+async function loadLocationData(
+  location: LatLng,
+  setWikiData: any,
+  lang: Language
+) {
   const locationData = await reverseGeoEncoding(location.lat, location.lng);
-  console.log(locationData);
-  const wikiData = await fetchWikiData(locationData.city);
-  console.log(wikiData);
-  setWikiData(wikiData)
+
+  const wikiData = await fetchWikiData(locationData.city, lang);
+
+  setWikiData(wikiData);
 }
 
 function LocationMarker(props: any) {
+  const { configs } = useContext(ConfigContext);
+
   const [position, setPosition] = React.useState<L.LatLng>();
   const [bbox, setBbox] = React.useState<string[]>([]);
   const map = useMap();
+
+  React.useEffect(() => {
+    console.log("effekt " + configs.language);
+  }, [configs.language]);
 
   React.useEffect(() => {
     map.locate().on("locationfound", function (e) {
@@ -32,17 +45,17 @@ function LocationMarker(props: any) {
       const circle = L.circle(e.latlng, radius);
       circle.addTo(map);
       setBbox(e.bounds.toBBoxString().split(","));
-      loadLocationData(e.latlng, props.onLocationChange)
+      loadLocationData(e.latlng, props.onLocationChange, configs.language);
     });
-  }, [map]);
+  }, [map, configs.language]);
 
   React.useEffect(() => {
-    map.on('click', function (e) {
+    map.on("click", function (e) {
       setPosition(e.latlng);
       map.flyTo(e.latlng, map.getZoom());
-      loadLocationData(e.latlng, props.onLocationChange)
+      loadLocationData(e.latlng, props.onLocationChange, configs.language);
     });
-  }, [map]);
+  }, [map, configs.language]);
 
   return position === undefined ? null : (
     <Marker position={position}>
@@ -70,7 +83,7 @@ function Map(props: any) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {props.children}
-      <LocationMarker onLocationChange={props.onLocationChange}/>
+      <LocationMarker onLocationChange={props.onLocationChange} />
     </MapContainer>
   );
 }
