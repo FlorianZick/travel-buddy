@@ -20,9 +20,11 @@ import L from "leaflet";
 
 interface Props {
   data: WikiApiDataModel[] | null;
+  isModalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SheetModal: React.FC<Props> = ({ data }): React.ReactElement => {
+const SheetModal: React.FC<Props> = ({ data, isModalOpen, setModalOpen }): React.ReactElement => {
   const modal = React.useRef(null);
 
   React.useEffect(() => {
@@ -33,7 +35,7 @@ const SheetModal: React.FC<Props> = ({ data }): React.ReactElement => {
   return (
     <div id="sheetModalDiv">
       <IonFab slot="fixed" class="infoBtn">
-        <IonFabButton id="open-modal">
+        <IonFabButton id="open-modal" onClick={() => {setModalOpen(true)}}>
           <IonIcon icon={locationOutline}></IonIcon>
         </IonFabButton>
       </IonFab>
@@ -53,7 +55,8 @@ const SheetModal: React.FC<Props> = ({ data }): React.ReactElement => {
       </IonFab>
       <IonModal
         ref={modal}
-        trigger="open-modal"
+        isOpen={isModalOpen}
+        onWillDismiss={() => {setModalOpen(false)}}
         initialBreakpoint={0.5}
         breakpoints={[0, 0.15, 0.5, 0.9]}
       >

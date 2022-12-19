@@ -7,6 +7,7 @@ import { reverseGeoEncoding } from "../api/reverseGeoEncoding";
 import { ConfigContext } from "./ConfigContext";
 import { useContext } from "react";
 import { Language } from "./ConfigContext/types";
+import { WikiApiDataModel } from "../models/wikiApiDataModel";
 
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -14,7 +15,13 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-function LocationMarker(props: any) {
+// interface for props
+interface Props {
+  onLocationChange: React.Dispatch<React.SetStateAction<WikiApiDataModel[] | null>>;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function LocationMarker(props: Props) {
   const { configs } = useContext(ConfigContext);
 
   const [position, setPosition] = React.useState<L.LatLng>();
@@ -41,7 +48,7 @@ function LocationMarker(props: any) {
       const circle = L.circle(e.latlng, radius);
       circle.addTo(map);
       setBbox(e.bounds.toBBoxString().split(","));
-      loadLocationData(e.latlng, props.onLocationChange, configs.language);
+      loadLocationData(e.latlng, props.onLocationChange, configs.language).then(() => {props.setModalOpen(true)});
     },
     [configs.language]
   );
@@ -50,7 +57,7 @@ function LocationMarker(props: any) {
     (e: any) => {
       setPosition(e.latlng);
       map.flyTo(e.latlng, map.getZoom());
-      loadLocationData(e.latlng, props.onLocationChange, configs.language);
+      loadLocationData(e.latlng, props.onLocationChange, configs.language).then(() => {props.setModalOpen(true)});
     },
     [configs.language]
   );
@@ -93,7 +100,7 @@ function Map(props: any) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {props.children}
-      <LocationMarker onLocationChange={props.onLocationChange} />
+      <LocationMarker onLocationChange={props.onLocationChange} setModalOpen={props.setModalOpen}/>
     </MapContainer>
   );
 }

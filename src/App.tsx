@@ -38,6 +38,8 @@ const App: React.FC = (): ReactElement => {
     null
   );
 
+  const [isModalOpen, setModalOpen] = React.useState<boolean>(false);
+
   const { i18n } = useTranslation();
   const { configs } = useContext(ConfigContext);
 
@@ -47,9 +49,9 @@ const App: React.FC = (): ReactElement => {
 
   return (
     <IonApp>
-      <Map onLocationChange={setLocationInfo}>
+      <Map onLocationChange={setLocationInfo} setModalOpen={setModalOpen}>
         <Menu />
-        <SheetModal data={locationInfo} />
+        <SheetModal data={locationInfo} isModalOpen={isModalOpen} setModalOpen={setModalOpen}/>
       </Map>
     </IonApp>
   );
