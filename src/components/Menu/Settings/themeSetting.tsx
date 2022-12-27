@@ -22,6 +22,18 @@ const DarkModeSetting: React.FC = (): ReactElement => {
       <IonSelect
         selectedText={configs.theme}
         onIonChange={(e) => {
+
+          const theme = e.detail.value;
+
+          if (theme == Theme.LIGHT) {
+            document.body.classList.toggle('dark', false);
+          } else if (theme == Theme.DARK) {
+            document.body.classList.toggle('dark', true);
+          } else if (theme == Theme.SYSTEM_SETTING) {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+            document.body.classList.toggle('dark', prefersDark.matches);
+          }
+
           configs.theme = e.detail.value;
           setConfigs({ ...configs });
         }}

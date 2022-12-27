@@ -30,6 +30,7 @@ import { WikiApiDataModel } from "./models/wikiApiDataModel";
 import Menu from "./components/Menu/menu";
 import { useTranslation } from "react-i18next";
 import { ConfigContext } from "./components/ConfigContext/ConfigContext";
+import { Theme } from "./components/ConfigContext/types";
 
 setupIonicReact();
 
@@ -46,6 +47,19 @@ const App: React.FC = (): ReactElement => {
   useEffect(() => {
     i18n.changeLanguage(configs.language);
   }, []);
+
+  useEffect(() => {
+    const theme = configs.theme;
+
+    if (theme == Theme.LIGHT) {
+      document.body.classList.toggle('dark', false);
+    } else if (theme == Theme.DARK) {
+      document.body.classList.toggle('dark', true);
+    } else if (theme == Theme.SYSTEM_SETTING) {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+      document.body.classList.toggle('dark', prefersDark.matches);
+    }
+  })
 
   return (
     <IonApp>
