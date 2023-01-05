@@ -35,40 +35,46 @@ import { Theme } from "./components/ConfigContext/types";
 setupIonicReact();
 
 const App: React.FC = (): ReactElement => {
-  const [locationInfo, setLocationInfo] = useState<WikiApiDataModel[] | null>(
-    null
-  );
+    const [locationInfo, setLocationInfo] = useState<WikiApiDataModel[] | null>(
+        null
+    );
 
-  const [isModalOpen, setModalOpen] = React.useState<boolean>(false);
+    const [isModalOpen, setModalOpen] = React.useState<boolean>(false);
 
-  const { i18n } = useTranslation();
-  const { configs } = useContext(ConfigContext);
+    const { i18n } = useTranslation();
+    const { configs } = useContext(ConfigContext);
 
-  useEffect(() => {
-    i18n.changeLanguage(configs.language);
-  }, []);
+    useEffect(() => {
+        i18n.changeLanguage(configs.language);
+    }, []);
 
-  useEffect(() => {
-    const theme = configs.theme;
+    useEffect(() => {
+        const theme = configs.theme;
 
-    if (theme == Theme.LIGHT) {
-      document.body.classList.toggle('dark', false);
-    } else if (theme == Theme.DARK) {
-      document.body.classList.toggle('dark', true);
-    } else if (theme == Theme.SYSTEM_SETTING) {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-      document.body.classList.toggle('dark', prefersDark.matches);
-    }
-  })
+        if (theme === Theme.LIGHT) {
+            document.body.classList.toggle("dark", false);
+        } else if (theme === Theme.DARK) {
+            document.body.classList.toggle("dark", true);
+        } else if (theme === Theme.SYSTEM_SETTING) {
+            const prefersDark = window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            );
+            document.body.classList.toggle("dark", prefersDark.matches);
+        }
+    });
 
-  return (
-    <IonApp>
-      <Map onLocationChange={setLocationInfo} setModalOpen={setModalOpen}>
-        <Menu />
-        <SheetModal data={locationInfo} isModalOpen={isModalOpen} setModalOpen={setModalOpen}/>
-      </Map>
-    </IonApp>
-  );
+    return (
+        <IonApp>
+            <Map onLocationChange={setLocationInfo} setModalOpen={setModalOpen}>
+                <Menu />
+                <SheetModal
+                    data={locationInfo}
+                    isModalOpen={isModalOpen}
+                    setModalOpen={setModalOpen}
+                />
+            </Map>
+        </IonApp>
+    );
 };
 
 export default App;
