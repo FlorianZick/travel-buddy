@@ -1,3 +1,6 @@
 #ionFabButton {
     --background: transparent !important;
 }
+#settingsIcon {
+    color: #222428 !important;
+}

@@ -27,11 +27,7 @@ const MenuButton: React.FC<Props> = ({ setIsOpen }): ReactElement => {
                 id="ionFabButton"
                 style={{ background: "transparent" }}
             >
-                <IonIcon
-                    icon={menu}
-                    id="settingsIcon"
-                    color="#222428 !important"
-                ></IonIcon>
+                <IonIcon icon={menu} id="settingsIcon"></IonIcon>
             </IonFabButton>
         </IonFab>
     );
