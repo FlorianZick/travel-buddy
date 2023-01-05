@@ -25,7 +25,7 @@ const Settings: React.FC<Props> = ({ isOpen, setIsOpen }): ReactElement => {
         L.DomEvent.disableClickPropagation(divRef);
     });
     return (
-        <IonModal isOpen={isOpen} id="settingsModal">
+        <IonModal isOpen={isOpen} id="settingsModal" backdropDismiss={false}>
             <IonHeader>
                 <IonToolbar>
                     <IonTitle>{t("settings.settingsTitle")}</IonTitle>

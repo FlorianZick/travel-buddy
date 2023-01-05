@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { menu } from "ionicons/icons";
 import L from "leaflet";
+import "./menuButton.css";
 
 // interface for props
 interface Props {
@@ -20,7 +21,12 @@ const MenuButton: React.FC<Props> = ({ setIsOpen }): ReactElement => {
             class="menuBtn"
             id="menuButton"
         >
-            <IonFabButton size="small" class="menuInnerBtn">
+            <IonFabButton
+                size="small"
+                class="menuInnerBtn"
+                id="ionFabButton"
+                style={{ background: "transparent" }}
+            >
                 <IonIcon
                     icon={menu}
                     id="settingsIcon"
