@@ -38,6 +38,11 @@ const App: React.FC = (): ReactElement => {
     const [locationInfo, setLocationInfo] = useState<WikiApiDataModel[] | null>(
         null
     );
+    const [curPosLocationInfo, setCurPosLocationInfo] = useState<
+        WikiApiDataModel[] | null
+    >(null);
+    const [showCurPosInformation, setShowCurPosInformation] =
+        useState<boolean>(true);
 
     const [isModalOpen, setModalOpen] = React.useState<boolean>(false);
 
@@ -65,12 +70,23 @@ const App: React.FC = (): ReactElement => {
 
     return (
         <IonApp>
-            <Map onLocationChange={setLocationInfo} setModalOpen={setModalOpen}>
+            <Map
+                onLocationChange={setLocationInfo}
+                onCurPosLocationChange={setCurPosLocationInfo}
+                setModalOpen={setModalOpen}
+                setShowCurPosInformation={setShowCurPosInformation}
+            >
                 <Menu />
                 <SheetModal
-                    data={locationInfo}
+                    data={
+                        showCurPosInformation
+                            ? curPosLocationInfo
+                            : locationInfo
+                    }
                     isModalOpen={isModalOpen}
                     setModalOpen={setModalOpen}
+                    showCurPosInformation={showCurPosInformation}
+                    setShowCurPosInformation={setShowCurPosInformation}
                 />
             </Map>
         </IonApp>

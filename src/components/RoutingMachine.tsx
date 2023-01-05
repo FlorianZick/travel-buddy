@@ -7,8 +7,7 @@ declare let L: any;
 
 var routingControl: any;
 
-function createRoutineMachineLayer(props: any) {
-    console.log(props.pos1);
+function createRoutineMachineLayer() {
     routingControl = L.Routing.control({
         waypoints: [null],
         lineOptions: {

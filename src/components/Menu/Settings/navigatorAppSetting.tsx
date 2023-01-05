@@ -11,7 +11,7 @@ const NavigatorAppSetting: React.FC = (): ReactElement => {
     const { configs, setConfigs } = useContext(ConfigContext);
 
     return (
-        <IonItem>
+        <IonItem style={{ margin: "0 20px" }}>
             <IonLabel>{t("settings.navigatorApp")}</IonLabel>
             <IonSelect
                 selectedText={configs.navigator}

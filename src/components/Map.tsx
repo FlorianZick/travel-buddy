@@ -1,6 +1,6 @@
 import * as React from "react";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import L, { LatLng } from "leaflet";
 import { fetchWikiData } from "../api/fetchWikiData";
 import { reverseGeoEncoding } from "../api/reverseGeoEncoding";
@@ -24,7 +24,11 @@ interface Props {
     onLocationChange: React.Dispatch<
         React.SetStateAction<WikiApiDataModel[] | null>
     >;
+    onCurPosLocationChange: React.Dispatch<
+        React.SetStateAction<WikiApiDataModel[] | null>
+    >;
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowCurPosInformation: React.Dispatch<React.SetStateAction<boolean>>;
     children?: React.ReactNode;
 }
 
@@ -32,6 +36,7 @@ function LocationMarker(props: Props) {
     const { configs } = useContext(ConfigContext);
 
     const [position, setPosition] = React.useState<L.LatLng>();
+
     const [bbox, setBbox] = React.useState<string[]>([]);
     const map = useMap();
 
@@ -58,10 +63,10 @@ function LocationMarker(props: Props) {
             setBbox(e.bounds.toBBoxString().split(","));
             loadLocationData(
                 e.latlng,
-                props.onLocationChange,
+                props.onCurPosLocationChange,
                 configs.language
             ).then(() => {
-                props.setModalOpen(true);
+                // props.setModalOpen(true);
             });
         },
         [configs.language]
@@ -77,6 +82,7 @@ function LocationMarker(props: Props) {
                 props.onLocationChange,
                 configs.language
             ).then(() => {
+                props.setShowCurPosInformation(false);
                 props.setModalOpen(true);
             });
         },
@@ -119,7 +125,9 @@ function LocationMarker(props: Props) {
 
 const Map: React.FC<Props> = ({
     onLocationChange,
+    onCurPosLocationChange,
     setModalOpen,
+    setShowCurPosInformation,
     children,
 }): React.ReactElement => {
     return (
@@ -137,12 +145,11 @@ const Map: React.FC<Props> = ({
             {children}
             <LocationMarker
                 onLocationChange={onLocationChange}
+                onCurPosLocationChange={onCurPosLocationChange}
                 setModalOpen={setModalOpen}
+                setShowCurPosInformation={setShowCurPosInformation}
             />
-            <RoutingMachine
-                pos1={{ lat: 50, lng: 10 }}
-                pos2={{ lat: 50.3, lng: 10.3 }}
-            />
+            <RoutingMachine />
         </MapContainer>
     );
 };
