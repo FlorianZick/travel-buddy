@@ -1,4 +1,5 @@
 import { IonApp, setupIonicReact } from "@ionic/react";
+import { Online, Offline } from "react-detect-offline";
 
 import Map from "./components/Map";
 import SheetModal from "./components/SheetModal/SheetModal";
@@ -31,6 +32,7 @@ import Menu from "./components/Menu/menu";
 import { useTranslation } from "react-i18next";
 import { ConfigContext } from "./components/ConfigContext/ConfigContext";
 import { Theme } from "./components/ConfigContext/types";
+import NoInternetConnection from "./components/NoInternetConnection";
 
 setupIonicReact();
 
@@ -44,7 +46,7 @@ const App: React.FC = (): ReactElement => {
     const [showCurPosInformation, setShowCurPosInformation] =
         useState<boolean>(true);
 
-    const [isModalOpen, setModalOpen] = React.useState<boolean>(false);
+    const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
     const { i18n } = useTranslation();
     const { configs } = useContext(ConfigContext);
@@ -69,27 +71,34 @@ const App: React.FC = (): ReactElement => {
     });
 
     return (
-        <IonApp>
-            <Map
-                onLocationChange={setLocationInfo}
-                onCurPosLocationChange={setCurPosLocationInfo}
-                setModalOpen={setModalOpen}
-                setShowCurPosInformation={setShowCurPosInformation}
-            >
-                <Menu />
-                <SheetModal
-                    data={
-                        showCurPosInformation
-                            ? curPosLocationInfo
-                            : locationInfo
-                    }
-                    isModalOpen={isModalOpen}
-                    setModalOpen={setModalOpen}
-                    showCurPosInformation={showCurPosInformation}
-                    setShowCurPosInformation={setShowCurPosInformation}
-                />
-            </Map>
-        </IonApp>
+        <>
+            <Offline>
+                <NoInternetConnection />
+            </Offline>
+            <Online>
+                <IonApp>
+                    <Map
+                        onLocationChange={setLocationInfo}
+                        onCurPosLocationChange={setCurPosLocationInfo}
+                        setModalOpen={setModalOpen}
+                        setShowCurPosInformation={setShowCurPosInformation}
+                    >
+                        <Menu />
+                        <SheetModal
+                            data={
+                                showCurPosInformation
+                                    ? curPosLocationInfo
+                                    : locationInfo
+                            }
+                            isModalOpen={isModalOpen}
+                            setModalOpen={setModalOpen}
+                            showCurPosInformation={showCurPosInformation}
+                            setShowCurPosInformation={setShowCurPosInformation}
+                        />
+                    </Map>
+                </IonApp>
+            </Online>
+        </>
     );
 };
 
