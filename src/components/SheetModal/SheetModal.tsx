@@ -13,7 +13,7 @@ import {
 import { locationOutline } from "ionicons/icons";
 import "typeface-roboto";
 import "./sheetModal.css";
-import Eventcard from "../Card";
+import Eventcard from "../Eventcard";
 import { WikiApiDataModel } from "../../models/wikiApiDataModel";
 import Header from "./header";
 import L from "leaflet";
