@@ -26,7 +26,7 @@ function isTermInvalid(term: string): boolean {
     return invalidTerms.includes(term);
 }
 
-function invalidTermErrorMessage(t: any): WikiApiDataModel[] {
+function getInvalidTermErrorMessage(t: any): WikiApiDataModel[] {
     return [
         {
             title: t("errors.invalidTerm.title"),
@@ -35,7 +35,7 @@ function invalidTermErrorMessage(t: any): WikiApiDataModel[] {
     ];
 }
 
-function dataTransmissionErrorMessage(t: any): WikiApiDataModel[] {
+function getDataTransmissionErrorMessage(t: any): WikiApiDataModel[] {
     return [
         {
             title: t("errors.dataTransmission.title"),
@@ -44,7 +44,7 @@ function dataTransmissionErrorMessage(t: any): WikiApiDataModel[] {
     ];
 }
 
-function noInformationErrorMessage(
+function getNoInformationErrorMessage(
     t: any,
     url: string,
     term: string
@@ -68,7 +68,7 @@ export async function fetchWikiData(
     lang: Language
 ): Promise<WikiApiDataModel[]> {
     if (isTermInvalid(term)) {
-        return invalidTermErrorMessage(t);
+        return getInvalidTermErrorMessage(t);
     }
     let languageCode = getLanguageCode(lang);
     let url = "https://" + languageCode + ".wikipedia.org/w/api.php";
@@ -104,10 +104,10 @@ export async function fetchWikiData(
             }
         })
         .catch((e) => {
-            return dataTransmissionErrorMessage(t);
+            return getDataTransmissionErrorMessage(t);
         });
     if (wikiSearchResults.length === 0) {
-        return noInformationErrorMessage(t, url, term);
+        return getNoInformationErrorMessage(t, url, term);
     }
     return wikiSearchResults;
 }
