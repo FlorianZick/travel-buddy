@@ -37,7 +37,7 @@ function LocationMarker(props: Props) {
 
     const [position, setPosition] = React.useState<L.LatLng>();
 
-    const [bbox, setBbox] = React.useState<string[]>([]);
+    // const [bbox, setBbox] = React.useState<string[]>([]);
     const map = useMap();
 
     React.useEffect(() => {
@@ -57,10 +57,10 @@ function LocationMarker(props: Props) {
             setPosition(e.latlng);
             setCurrentPosition(e.latlng);
             map.flyTo(e.latlng, map.getZoom());
-            const radius = e.accuracy;
-            const circle = L.circle(e.latlng, radius);
-            circle.addTo(map);
-            setBbox(e.bounds.toBBoxString().split(","));
+            // const radius = e.accuracy;
+            // const circle = L.circle(e.latlng, radius);
+            // circle.addTo(map);
+            // setBbox(e.bounds.toBBoxString().split(","));
             loadLocationData(
                 e.latlng,
                 props.onCurPosLocationChange,
@@ -104,23 +104,25 @@ function LocationMarker(props: Props) {
         setWikiData(wikiData);
     }
 
-    return position === undefined ? null : (
-        <Marker
-            position={position}
-            eventHandlers={{
-                click: (e) => {
-                    props.setModalOpen(true);
-                },
-            }}
-        >
-            {/* <Popup>
-                Mein Standort
-                <br />
-                (Blauer Kreis = Genauigkeit
-                <br /> des Standorts)
-            </Popup> */}
-        </Marker>
-    );
+    return null;
+    // position === undefined ? null : (
+    // <></>
+    // <Marker
+    //     position={position}
+    //     eventHandlers={{
+    //         click: (e) => {
+    //             props.setModalOpen(true);
+    //         },
+    //     }}
+    // >
+    //     {/* <Popup>
+    //         Mein Standort
+    //         <br />
+    //         (Blauer Kreis = Genauigkeit
+    //         <br /> des Standorts)
+    //     </Popup> */}
+    // </Marker>
+    // );
 }
 
 const Map: React.FC<Props> = ({

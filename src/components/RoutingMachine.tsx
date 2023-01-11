@@ -7,6 +7,17 @@ declare let L: any;
 
 var routingControl: any;
 
+var redIcon = new L.Icon({
+    iconUrl:
+        "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+    shadowUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+});
+
 function createRoutineMachineLayer() {
     routingControl = L.Routing.control({
         waypoints: [null],
@@ -23,6 +34,13 @@ function createRoutineMachineLayer() {
         draggableWaypoints: false,
         fitSelectedRoutes: true,
         showAlternatives: false,
+        createMarker: function (i: number, wp: any, n: number) {
+            if (i === 0 || i < n - 1) {
+                return L.marker(wp.latLng);
+            } else {
+                return L.marker(wp.latLng, { icon: redIcon });
+            }
+        },
     });
     return routingControl;
 }
@@ -35,11 +53,15 @@ export function setCurrentPosition(pos: any) {
 export function setDestinationPosition(pos: any) {
     let curPos = routingControl.getWaypoints()[0].latLng;
     // console.log(curPos);
-    routingControl.setWaypoints([
-        L.latLng(curPos.lat, curPos.lng),
-        L.latLng(pos.lat, pos.lng),
-    ]);
-    // routingControl._container.style.display = "Block";
+    if (curPos !== null) {
+        routingControl.setWaypoints([
+            L.latLng(curPos.lat, curPos.lng),
+            L.latLng(pos.lat, pos.lng),
+        ]);
+    } else {
+        routingControl.setWaypoints([L.latLng(pos.lat, pos.lng)]);
+    }
+    routingControl._container.style.display = "None";
 }
 
 export function exportRoute(navigator: NavigatorApp) {

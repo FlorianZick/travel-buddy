@@ -1,5 +1,5 @@
 import React from "react";
-import { IonCol, IonGrid, IonRow, IonButton, IonSpinner } from "@ionic/react";
+import { IonCol, IonGrid, IonRow } from "@ionic/react";
 import noInternetConnectionCloud from "./resources/noInternetConnectionCloud.jpg";
 
 import "./noInternetConnection.css";
