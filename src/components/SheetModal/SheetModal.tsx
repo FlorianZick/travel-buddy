@@ -76,6 +76,7 @@ const SheetModal: React.FC<Props> = ({
                 }}
                 initialBreakpoint={0.5}
                 breakpoints={[0, 0.15, 0.5, 1.0]}
+                id="ionModal"
             >
                 <IonContent className="ion-padding">
                     <IonList>

@@ -20,6 +20,11 @@
             "snippet1": "Il y a eu sous ",
             "snippet2": " aucune information sur le terme ",
             "snippet3": " trouvé."
+        },
+        "noInterConnection": {
+            "head": "Travel Buddy ne peut pas accéder à l'internet",
+            "body": "Vérifiez votre connexion internet",
+            "btn": "Essayez à nouveau"
         }
     }
 }

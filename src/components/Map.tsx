@@ -1,6 +1,6 @@
 import * as React from "react";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import L, { LatLng } from "leaflet";
 import { useTranslation } from "react-i18next";
 import { fetchWikiData } from "../api/fetchWikiData";

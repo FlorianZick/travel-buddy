@@ -20,6 +20,11 @@
             "snippet1": "There was under ",
             "snippet2": " no information on the term ",
             "snippet3": " found."
+        },
+        "noInterConnection": {
+            "head": "Travel Buddy can't reach the internet",
+            "body": "Check your internet connection",
+            "btn": "Try again"
         }
     }
 }

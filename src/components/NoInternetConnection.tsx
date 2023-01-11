@@ -1,18 +1,20 @@
 import React from "react";
-import { IonCol, IonGrid, IonRow } from "@ionic/react";
+import { useTranslation } from "react-i18next";
+import { IonCol, IonGrid, IonRow, IonSpinner, IonButton } from "@ionic/react";
 import noInternetConnectionCloud from "./resources/noInternetConnectionCloud.jpg";
 
 import "./noInternetConnection.css";
 
 function NoInternetConnection() {
-    // const [isRefreshing, setIsRefreshing] = React.useState<boolean>(false);
-    // function refreshPage() {
-    //     setIsRefreshing(true);
-    //     setTimeout(() => {
-    //         window.location.reload();
-    //         setIsRefreshing(false);
-    //     }, 300);
-    // }
+    const { t } = useTranslation();
+    const [isRefreshing, setIsRefreshing] = React.useState<boolean>(false);
+    function refreshPage() {
+        setIsRefreshing(true);
+        setTimeout(() => {
+            window.location.reload();
+            setIsRefreshing(false);
+        }, 300);
+    }
     return (
         <div id="noInternetBackground">
             <IonGrid
@@ -34,28 +36,28 @@ function NoInternetConnection() {
                 </IonRow>
                 <IonRow style={{ marginTop: "-20px" }}>
                     <IonCol id="noInternetHead">
-                        Travel Buddy can't reach the internet
+                        {t("errors.noInterConnection.head")}
                     </IonCol>
                 </IonRow>
                 <IonRow>
                     <IonCol id="noInternetBody">
-                        Check your internet connection
+                        {t("errors.noInterConnection.body")}
                     </IonCol>
                 </IonRow>
-                {/* <IonRow style={{ marginTop: "30px" }}>
+                <IonRow style={{ marginTop: "30px" }}>
                     <IonCol>
                         <IonButton
                             onClick={refreshPage}
-                            style={{ width: "150px" }}
+                            style={{ width: "200px" }}
                         >
                             {isRefreshing ? (
-                                <></> // <IonSpinner name="crescent"></IonSpinner>
+                                <IonSpinner name="crescent"></IonSpinner>
                             ) : (
-                                "Try again"
+                                t("errors.noInterConnection.btn")
                             )}
                         </IonButton>
                     </IonCol>
-                </IonRow> */}
+                </IonRow>
             </IonGrid>
         </div>
     );
