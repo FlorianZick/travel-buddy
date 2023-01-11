@@ -64,44 +64,56 @@ export function setDestinationPosition(pos: any) {
     routingControl._container.style.display = "None";
 }
 
+function getGoogleMapsUrl(curPos: any, destPos: any): string {
+    return (
+        "https://www.google.com/maps/dir/?api=1&origin=" +
+        curPos.lat +
+        "," +
+        curPos.lng +
+        "&destination=" +
+        destPos.lat +
+        "," +
+        destPos.lng +
+        "&travelmode=driving"
+    );
+}
+
+function getAppleMapsUrl(curPos: any, destPos: any): string {
+    return (
+        "http://maps.apple.com/?saddr=" +
+        curPos.lat +
+        "," +
+        curPos.lng +
+        "&daddr=" +
+        destPos.lat +
+        "," +
+        destPos.lng
+    );
+}
+
+function getWazeUrl(curPos: any, destPos: any): string {
+    return (
+        "https://www.waze.com/de/live-map/directions?to=ll." +
+        destPos.lat +
+        "%2C" +
+        destPos.lng +
+        "&from=ll." +
+        curPos.lat +
+        "%2C" +
+        curPos.lng
+    );
+}
+
 export function exportRoute(navigator: NavigatorApp) {
-    let waypoints = routingControl.getWaypoints();
-    let curPos = waypoints[0].latLng;
-    let destPos = waypoints[1].latLng;
+    const waypoints = routingControl.getWaypoints();
+    const curPos = waypoints[0].latLng;
+    const destPos = waypoints[1].latLng;
     if (navigator === NavigatorApp.GOOGLE_MAPS) {
-        window.open(
-            "https://www.google.com/maps/dir/?api=1&origin=" +
-                curPos.lat +
-                "," +
-                curPos.lng +
-                "&destination=" +
-                destPos.lat +
-                "," +
-                destPos.lng +
-                "&travelmode=driving"
-        );
+        window.open(getGoogleMapsUrl(curPos, destPos));
     } else if (navigator === NavigatorApp.WAZE) {
-        window.open(
-            "https://www.waze.com/de/live-map/directions?to=ll." +
-                destPos.lat +
-                "%2C" +
-                destPos.lng +
-                "&from=ll." +
-                curPos.lat +
-                "%2C" +
-                curPos.lng
-        );
+        window.open(getWazeUrl(curPos, destPos));
     } else if (navigator === NavigatorApp.APPLE_MAPS) {
-        window.open(
-            "http://maps.apple.com/?saddr=" +
-                curPos.lat +
-                "," +
-                curPos.lng +
-                "&daddr=" +
-                destPos.lat +
-                "," +
-                destPos.lng
-        );
+        window.open(getAppleMapsUrl(curPos, destPos));
     }
 }
 
