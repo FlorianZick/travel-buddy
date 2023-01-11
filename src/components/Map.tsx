@@ -2,6 +2,7 @@ import * as React from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import L, { LatLng } from "leaflet";
+import { useTranslation } from "react-i18next";
 import { fetchWikiData } from "../api/fetchWikiData";
 import { reverseGeoEncoding } from "../api/reverseGeoEncoding";
 import { ConfigContext } from "./ConfigContext";
@@ -39,6 +40,7 @@ function LocationMarker(props: Props) {
 
     // const [bbox, setBbox] = React.useState<string[]>([]);
     const map = useMap();
+    const { t } = useTranslation();
 
     React.useEffect(() => {
         // On every language change, remove the old event listeners and add new ones
@@ -99,7 +101,7 @@ function LocationMarker(props: Props) {
             location.lng
         );
 
-        const wikiData = await fetchWikiData(locationData.city, lang);
+        const wikiData = await fetchWikiData(t, locationData.city, lang);
 
         setWikiData(wikiData);
     }

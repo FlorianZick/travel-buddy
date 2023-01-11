@@ -1,9 +1,25 @@
 {
-  "settings": {
-    "settingsTitle": "Einstellungen",
-    "theme": "Theme",
-    "language": "Sprache",
-    "navigatorApp": "Navigator App",
-    "close": "Schließen"
-  }
+    "settings": {
+        "settingsTitle": "Einstellungen",
+        "theme": "Theme",
+        "language": "Sprache",
+        "navigatorApp": "Navigator App",
+        "close": "Schließen"
+    },
+    "errors": {
+        "invalidTerm": {
+            "title": "Keine Informationen gefunden",
+            "snippet": "Es wurden keine Informationen zu diesem Ort gefunden."
+        },
+        "dataTransmission": {
+            "title": "Fehler bei Datenübertragung",
+            "snippet": "Beim Empfangen der Informationen von Wikipedia ist ein Fehler aufgetreten, bitte versuchen Sie es zu einem späteren Zeitpunkt erneut!"
+        },
+        "noInformation": {
+            "title": "Keine Informationen gefunden",
+            "snippet1": "Es wurden unter ",
+            "snippet2": " keine Informationen zu dem Term ",
+            "snippet3": " gefunden."
+        }
+    }
 }
