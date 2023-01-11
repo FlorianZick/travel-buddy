@@ -50,6 +50,11 @@ export function setCurrentPosition(pos: any) {
     routingControl._container.style.display = "None";
 }
 
+export function getCurrentPosition() {
+    let curPos = routingControl.getWaypoints()[0].latLng;
+    return curPos !== null ? curPos : null;
+}
+
 export function setDestinationPosition(pos: any) {
     let curPos = routingControl.getWaypoints()[0].latLng;
     // console.log(curPos);

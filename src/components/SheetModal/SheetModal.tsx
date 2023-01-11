@@ -17,6 +17,8 @@ import Eventcard from "../Eventcard";
 import { WikiApiDataModel } from "../../models/wikiApiDataModel";
 import Header from "./header";
 import L from "leaflet";
+import { useMap } from "react-leaflet";
+import { getCurrentPosition } from "../RoutingMachine";
 
 interface Props {
     data: WikiApiDataModel[] | null;
@@ -33,19 +35,23 @@ const SheetModal: React.FC<Props> = ({
     showCurPosInformation,
     setShowCurPosInformation,
 }): React.ReactElement => {
+    const map = useMap();
     const modal = React.useRef(null);
-
     React.useEffect(() => {
         const divRef = document.getElementById("sheetModalDiv")!;
         L.DomEvent.disableClickPropagation(divRef);
     });
-
     return (
         <div id="sheetModalDiv">
             <IonFab slot="fixed" class="infoBtn">
                 <IonFabButton
                     id="open-modal"
                     onClick={() => {
+                        let curPos = getCurrentPosition();
+                        if (curPos !== null) {
+                            map.flyTo(curPos, map.getZoom());
+                        }
+                        console.log("FLY TO POS");
                         setShowCurPosInformation(true);
                         setModalOpen(true);
                     }}
