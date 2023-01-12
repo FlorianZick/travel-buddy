@@ -1,9 +1,30 @@
 {
-  "settings": {
-    "settingsTitle": "Ajustes",
-    "theme": "Theme",
-    "language": "Idioma",
-    "navigatorApp": "Aplicación de navegador",
-    "close": "Cerrar"
-  }
+    "settings": {
+        "settingsTitle": "Ajustes",
+        "theme": "Theme",
+        "language": "Idioma",
+        "navigatorApp": "Aplicación de navegador",
+        "close": "Cerrar"
+    },
+    "errors": {
+        "invalidTerm": {
+            "title": "No se encontró información",
+            "snippet": "No se encontró información para esta ubicación."
+        },
+        "dataTransmission": {
+            "title": "Error de transferencia de datos",
+            "snippet": "Hubo un error al recibir información de Wikipedia, ¡inténtalo de nuevo más tarde!"
+        },
+        "noInformation": {
+            "title": "No se encontró información",
+            "snippet1": "Ha habido bajo ",
+            "snippet2": " no hay información sobre el término ",
+            "snippet3": " encontrado."
+        },
+        "noInterConnection": {
+            "head": "Travel Buddy no puede conectarse a Internet",
+            "body": "Compruebe su conexión a Internet",
+            "btn": "Inténtalo de nuevo"
+        }
+    }
 }

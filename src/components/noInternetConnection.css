@@ -1,0 +1,25 @@
+ion-col {
+    text-align: center;
+}
+
+#noInternetBackground {
+    width: 100%;
+    height: 100vh;
+    background-color: #f6f6f6 !important;
+}
+
+#noInternetHead {
+    margin: 0;
+    font-weight: 700;
+    font-size: 24px;
+    font-family: Roboto, sans-serif;
+    color: #222428 !important;
+}
+
+#noInternetBody {
+    margin: 0;
+    font-weight: 300;
+    font-size: 18px;
+    font-family: Roboto, sans-serif;
+    color: #222428 !important;
+}

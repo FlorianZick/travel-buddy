@@ -1,9 +1,30 @@
 {
-  "settings": {
-    "settingsTitle": "Settings",
-    "theme": "Theme",
-    "language": "Language",
-    "navigatorApp": "Navigator App",
-    "close": "Close"
-  }
+    "settings": {
+        "settingsTitle": "Settings",
+        "theme": "Theme",
+        "language": "Language",
+        "navigatorApp": "Navigator App",
+        "close": "Close"
+    },
+    "errors": {
+        "invalidTerm": {
+            "title": "No information found",
+            "snippet": "No information was found for this location."
+        },
+        "dataTransmission": {
+            "title": "Data transfer error",
+            "snippet": "There was an error receiving information from Wikipedia, please try again later!"
+        },
+        "noInformation": {
+            "title": "No information found",
+            "snippet1": "There was under ",
+            "snippet2": " no information on the term ",
+            "snippet3": " found."
+        },
+        "noInterConnection": {
+            "head": "Travel Buddy can't reach the internet",
+            "body": "Check your internet connection",
+            "btn": "Try again"
+        }
+    }
 }

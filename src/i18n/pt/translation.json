@@ -1,9 +1,30 @@
 {
-  "settings": {
-    "settingsTitle": "Definições",
-    "theme": "Theme",
-    "language": "Língua",
-    "navigatorApp": "Aplicativo de navegação",
-    "close": "Desligar"
-  }
+    "settings": {
+        "settingsTitle": "Definições",
+        "theme": "Theme",
+        "language": "Língua",
+        "navigatorApp": "Aplicativo de navegação",
+        "close": "Desligar"
+    },
+    "errors": {
+        "invalidTerm": {
+            "title": "Nenhuma informação encontrada",
+            "snippet": "Nenhuma informação foi encontrada para este local."
+        },
+        "dataTransmission": {
+            "title": "Erro de transferência de dados",
+            "snippet": "Ocorreu um erro ao receber informações da Wikipédia, tente novamente mais tarde!"
+        },
+        "noInformation": {
+            "title": "Nenhuma informação encontrada",
+            "snippet1": "Houve sob ",
+            "snippet2": " sem informação sobre o termo ",
+            "snippet3": " encontrado."
+        },
+        "noInterConnection": {
+            "head": "Travel Buddy não pode chegar à Internet",
+            "body": "Verifique a sua ligação à Internet",
+            "btn": "Tente novamente"
+        }
+    }
 }

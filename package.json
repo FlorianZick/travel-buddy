@@ -16,6 +16,7 @@
     "@types/jest": "^26.0.20",
     "@types/node": "^12.19.15",
     "@types/react": "^18.0.17",
+    "@types/react-detect-offline": "^2.4.1",
     "@types/react-dom": "^18.0.6",
     "@types/react-router": "^5.1.11",
     "@types/react-router-dom": "^5.1.7",
@@ -26,6 +27,7 @@
     "leaflet-geosearch": "^3.7.0",
     "leaflet-routing-machine": "^3.2.12",
     "react": "^18.2.0",
+    "react-detect-offline": "^2.4.5",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.1.1",
     "react-leaflet": "^4.2.0",
@@ -50,7 +52,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=false && react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(@ionic/react|@ionic/react-router|@ionic/core|@stencil/core|ionicons)/)'",
     "eject": "react-scripts eject"
   },

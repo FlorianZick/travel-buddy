@@ -1,7 +1,8 @@
 import * as React from "react";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import L, { LatLng } from "leaflet";
+import { useTranslation } from "react-i18next";
 import { fetchWikiData } from "../api/fetchWikiData";
 import { reverseGeoEncoding } from "../api/reverseGeoEncoding";
 import { ConfigContext } from "./ConfigContext";
@@ -37,8 +38,9 @@ function LocationMarker(props: Props) {
 
     const [position, setPosition] = React.useState<L.LatLng>();
 
-    const [bbox, setBbox] = React.useState<string[]>([]);
+    // const [bbox, setBbox] = React.useState<string[]>([]);
     const map = useMap();
+    const { t } = useTranslation();
 
     React.useEffect(() => {
         // On every language change, remove the old event listeners and add new ones
@@ -57,10 +59,10 @@ function LocationMarker(props: Props) {
             setPosition(e.latlng);
             setCurrentPosition(e.latlng);
             map.flyTo(e.latlng, map.getZoom());
-            const radius = e.accuracy;
-            const circle = L.circle(e.latlng, radius);
-            circle.addTo(map);
-            setBbox(e.bounds.toBBoxString().split(","));
+            // const radius = e.accuracy;
+            // const circle = L.circle(e.latlng, radius);
+            // circle.addTo(map);
+            // setBbox(e.bounds.toBBoxString().split(","));
             loadLocationData(
                 e.latlng,
                 props.onCurPosLocationChange,
@@ -99,28 +101,30 @@ function LocationMarker(props: Props) {
             location.lng
         );
 
-        const wikiData = await fetchWikiData(locationData.city, lang);
+        const wikiData = await fetchWikiData(t, locationData.city, lang);
 
         setWikiData(wikiData);
     }
 
-    return position === undefined ? null : (
-        <Marker
-            position={position}
-            eventHandlers={{
-                click: (e) => {
-                    props.setModalOpen(true);
-                },
-            }}
-        >
-            {/* <Popup>
-                Mein Standort
-                <br />
-                (Blauer Kreis = Genauigkeit
-                <br /> des Standorts)
-            </Popup> */}
-        </Marker>
-    );
+    return null;
+    // position === undefined ? null : (
+    // <></>
+    // <Marker
+    //     position={position}
+    //     eventHandlers={{
+    //         click: (e) => {
+    //             props.setModalOpen(true);
+    //         },
+    //     }}
+    // >
+    //     {/* <Popup>
+    //         Mein Standort
+    //         <br />
+    //         (Blauer Kreis = Genauigkeit
+    //         <br /> des Standorts)
+    //     </Popup> */}
+    // </Marker>
+    // );
 }
 
 const Map: React.FC<Props> = ({
@@ -155,3 +159,20 @@ const Map: React.FC<Props> = ({
 };
 
 export default Map;
+
+// const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
+// useEffect(() => {
+//     // Update network status
+//     const handleStatusChange = () => {
+//         setIsOnline(navigator.onLine);
+//     };
+//     // Listen to the online status
+//     window.addEventListener("online", handleStatusChange);
+//     // Listen to the offline status
+//     window.addEventListener("offline", handleStatusChange);
+//     // Specify how to clean up after this effect for performance improvment
+//     return () => {
+//         window.removeEventListener("online", handleStatusChange);
+//         window.removeEventListener("offline", handleStatusChange);
+//     };
+// }, [isOnline]);

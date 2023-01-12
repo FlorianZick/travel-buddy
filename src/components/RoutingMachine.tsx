@@ -7,6 +7,17 @@ declare let L: any;
 
 var routingControl: any;
 
+var redIcon = new L.Icon({
+    iconUrl:
+        "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+    shadowUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+});
+
 function createRoutineMachineLayer() {
     routingControl = L.Routing.control({
         waypoints: [null],
@@ -23,6 +34,13 @@ function createRoutineMachineLayer() {
         draggableWaypoints: false,
         fitSelectedRoutes: true,
         showAlternatives: false,
+        createMarker: function (i: number, wp: any, n: number) {
+            if (i === 0 || i < n - 1) {
+                return L.marker(wp.latLng);
+            } else {
+                return L.marker(wp.latLng, { icon: redIcon });
+            }
+        },
     });
     return routingControl;
 }
@@ -32,54 +50,75 @@ export function setCurrentPosition(pos: any) {
     routingControl._container.style.display = "None";
 }
 
+export function getCurrentPosition() {
+    let curPos = routingControl.getWaypoints()[0].latLng;
+    return curPos !== null ? curPos : null;
+}
+
 export function setDestinationPosition(pos: any) {
     let curPos = routingControl.getWaypoints()[0].latLng;
     // console.log(curPos);
-    routingControl.setWaypoints([
-        L.latLng(curPos.lat, curPos.lng),
-        L.latLng(pos.lat, pos.lng),
-    ]);
-    // routingControl._container.style.display = "Block";
+    if (curPos !== null) {
+        routingControl.setWaypoints([
+            L.latLng(curPos.lat, curPos.lng),
+            L.latLng(pos.lat, pos.lng),
+        ]);
+    } else {
+        routingControl.setWaypoints([L.latLng(pos.lat, pos.lng)]);
+    }
+    routingControl._container.style.display = "None";
+}
+
+function getGoogleMapsUrl(curPos: any, destPos: any): string {
+    return (
+        "https://www.google.com/maps/dir/?api=1&origin=" +
+        curPos.lat +
+        "," +
+        curPos.lng +
+        "&destination=" +
+        destPos.lat +
+        "," +
+        destPos.lng +
+        "&travelmode=driving"
+    );
+}
+
+function getAppleMapsUrl(curPos: any, destPos: any): string {
+    return (
+        "http://maps.apple.com/?saddr=" +
+        curPos.lat +
+        "," +
+        curPos.lng +
+        "&daddr=" +
+        destPos.lat +
+        "," +
+        destPos.lng
+    );
+}
+
+function getWazeUrl(curPos: any, destPos: any): string {
+    return (
+        "https://www.waze.com/de/live-map/directions?to=ll." +
+        destPos.lat +
+        "%2C" +
+        destPos.lng +
+        "&from=ll." +
+        curPos.lat +
+        "%2C" +
+        curPos.lng
+    );
 }
 
 export function exportRoute(navigator: NavigatorApp) {
-    let waypoints = routingControl.getWaypoints();
-    let curPos = waypoints[0].latLng;
-    let destPos = waypoints[1].latLng;
+    const waypoints = routingControl.getWaypoints();
+    const curPos = waypoints[0].latLng;
+    const destPos = waypoints[1].latLng;
     if (navigator === NavigatorApp.GOOGLE_MAPS) {
-        window.open(
-            "https://www.google.com/maps/dir/?api=1&origin=" +
-                curPos.lat +
-                "," +
-                curPos.lng +
-                "&destination=" +
-                destPos.lat +
-                "," +
-                destPos.lng +
-                "&travelmode=driving"
-        );
+        window.open(getGoogleMapsUrl(curPos, destPos));
     } else if (navigator === NavigatorApp.WAZE) {
-        window.open(
-            "https://www.waze.com/de/live-map/directions?to=ll." +
-                destPos.lat +
-                "%2C" +
-                destPos.lng +
-                "&from=ll." +
-                curPos.lat +
-                "%2C" +
-                curPos.lng
-        );
+        window.open(getWazeUrl(curPos, destPos));
     } else if (navigator === NavigatorApp.APPLE_MAPS) {
-        window.open(
-            "http://maps.apple.com/?saddr=" +
-                curPos.lat +
-                "," +
-                curPos.lng +
-                "&daddr=" +
-                destPos.lat +
-                "," +
-                destPos.lng
-        );
+        window.open(getAppleMapsUrl(curPos, destPos));
     }
 }
 
