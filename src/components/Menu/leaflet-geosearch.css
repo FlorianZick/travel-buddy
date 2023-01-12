@@ -99,6 +99,8 @@
 
 .leaflet-geosearch-button form {
   max-width: 350px;
+  background-color: white;
+  background: white;
 }
 
 .leaflet-control-geosearch form input {
@@ -124,10 +126,13 @@
 .leaflet-touch .leaflet-geosearch-bar form input {
   height: 40px;
   border-radius: 40px;
+  background: white !important;
+  color: black !important;
 }
 
 .leaflet-control-geosearch .results {
-  background: #fff;
+  background: #fff !important;
+  color: #555 !important;
 }
 
 .leaflet-control-geosearch .results > * {
@@ -229,8 +234,7 @@
   left: 0.5rem;
   cursor: pointer;
   text-decoration: none;
-  background-color: #fff;
-
+  background-color: #fff !important;
 }
 
 .leaflet-touch .leaflet-control-geosearch button.reset {
@@ -253,6 +257,5 @@
   cursor: pointer;
   text-decoration: none;
   background-color: #fff;
-
-}
+  }
 }
