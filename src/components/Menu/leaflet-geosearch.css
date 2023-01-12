@@ -222,7 +222,7 @@
 /* Reset button (x) */
 .leaflet-control-geosearch button.reset {
   color: black;
-  position: relative;
+  position: sticky;
   font-weight: bold;
   line-height: 26px;
   padding: 0 8px;
@@ -242,17 +242,17 @@
 }
 
 @media (max-width: 800px) {
-  .leaflet-control-geosearch button.reset {
+  .leaflet-control-geosearch button.reset { 
   color: black;
+  position: sticky;
   font-weight: bold;
-  position: absolute;
   line-height: 26px;
   padding: 0 8px;
-  right: 1rem;
-  top: 0.35rem;
+  left: 375px;
+  top: 15px;
   cursor: pointer;
-  border: none;
   text-decoration: none;
   background-color: #fff;
-  }
+
+}
 }
