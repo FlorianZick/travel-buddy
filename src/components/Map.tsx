@@ -14,6 +14,7 @@ import RoutingMachine, {
     setCurrentPosition,
     setDestinationPosition,
 } from "./RoutingMachine";
+import SatelliteButton from "./satelliteButton";
 
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -103,6 +104,7 @@ const Map: React.FC<Props> = ({
     setShowCurPosInformation,
     children,
 }): React.ReactElement => {
+    const [isSatellite, setIsSatellite] = React.useState(false);
     return (
         <MapContainer
             center={{ lat: 51.166, lng: 10.452 }}
@@ -111,11 +113,16 @@ const Map: React.FC<Props> = ({
             dragging={true}
             zoomControl={false}
         >
-            <TileLayer
-                attribution=""
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
+            {isSatellite ? (
+                <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
+            ) : (
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            )}
             {children}
+            <SatelliteButton
+                isSatellite={isSatellite}
+                setIsSatellite={setIsSatellite}
+            />
             <LocationMarker
                 onLocationChange={onLocationChange}
                 onCurPosLocationChange={onCurPosLocationChange}

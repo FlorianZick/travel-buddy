@@ -51,7 +51,6 @@ const SheetModal: React.FC<Props> = ({
                         if (curPos !== null) {
                             map.flyTo(curPos, map.getZoom());
                         }
-                        console.log("FLY TO POS");
                         setShowCurPosInformation(true);
                         setModalOpen(true);
                     }}
@@ -64,7 +63,7 @@ const SheetModal: React.FC<Props> = ({
                     <h1
                         style={{
                             margin: 0,
-                            fontWeight: 700,
+                            fontWeight: 900,
                             fontSize: "2rem",
                             fontFamily: "Roboto, sans-serif",
                         }}
