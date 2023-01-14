@@ -13,3 +13,15 @@
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
 }
+
+@media screen and (max-width: 600px) {
+    .infoBtn {
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    .nameTag {
+        bottom: 1rem;
+        left: 1rem;
+    }
+}

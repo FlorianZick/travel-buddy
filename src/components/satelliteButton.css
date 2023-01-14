@@ -2,3 +2,10 @@
     bottom: 6rem;
     right: 2rem;
 }
+
+@media screen and (max-width: 600px) {
+    #satelliteBtn {
+        bottom: 5rem;
+        right: 1rem;
+    }
+}
