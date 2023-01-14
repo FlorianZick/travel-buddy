@@ -64,7 +64,7 @@ const SheetModal: React.FC<Props> = ({
                         style={{
                             margin: 0,
                             fontWeight: 900,
-                            fontSize: "2rem",
+                            fontSize: "1.5rem",
                             fontFamily: "Roboto, sans-serif",
                         }}
                         id="logo"

@@ -9,5 +9,7 @@
 }
 
 #logo {
-    color: #e9193b !important;
+    color: #fff !important;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }
