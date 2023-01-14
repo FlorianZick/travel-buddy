@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
-import { map, mapOutline, menu } from "ionicons/icons";
+import { map, mapOutline } from "ionicons/icons";
 import L from "leaflet";
 import "./satelliteButton.css";
 

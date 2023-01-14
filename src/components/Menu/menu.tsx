@@ -52,7 +52,7 @@ const SearchField = ({
     const provider = new OpenStreetMapProvider({
         params: {
             access_token: apiKey,
-            "accept-language": "de", // render results in Dutch
+            "accept-language": "de", // render results in German
         },
     });
 

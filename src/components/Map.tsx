@@ -7,7 +7,7 @@ import { fetchWikiData } from "../api/fetchWikiData";
 import { reverseGeoEncoding } from "../api/reverseGeoEncoding";
 import { ConfigContext } from "./ConfigContext";
 import { useContext } from "react";
-import { Language } from "./ConfigContext/types";
+import { Language, Theme } from "./ConfigContext/types";
 import { WikiApiDataModel } from "../models/wikiApiDataModel";
 import RoutingMachine, {
     getCurrentPosition,
@@ -15,6 +15,7 @@ import RoutingMachine, {
     setDestinationPosition,
 } from "./RoutingMachine";
 import SatelliteButton from "./satelliteButton";
+import "./map.css";
 
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -97,6 +98,32 @@ function LocationMarker(props: Props) {
     return null;
 }
 
+function checkThemeDark(configs: any) {
+    let isDark = false;
+    if (configs.theme === Theme.DARK) {
+        isDark = true;
+    } else if (configs.theme === Theme.SYSTEM_SETTING) {
+        if (window.matchMedia("(prefers-color-scheme: dark)")) {
+            isDark = true;
+        }
+    }
+    return isDark;
+}
+
+async function getElementByClassNameAsync(className: string): Promise<Element> {
+    return new Promise((resolve) => {
+        const getElement = () => {
+            const element = document.getElementsByClassName(className)[0];
+            if (element) {
+                resolve(element);
+            } else {
+                requestAnimationFrame(getElement);
+            }
+        };
+        getElement();
+    });
+}
+
 const Map: React.FC<Props> = ({
     onLocationChange,
     onCurPosLocationChange,
@@ -105,6 +132,24 @@ const Map: React.FC<Props> = ({
     children,
 }): React.ReactElement => {
     const [isSatellite, setIsSatellite] = React.useState(false);
+    const { configs } = useContext(ConfigContext);
+    async function adjustMapFilter(darkMap: boolean) {
+        await getElementByClassNameAsync("leaflet-layer mapTiles").then(
+            (tilesRef) => {
+                if (tilesRef) {
+                    tilesRef.classList.toggle("darkTiles", darkMap);
+                }
+            }
+        );
+    }
+
+    React.useEffect(() => {
+        let darkMap = false;
+        if (!isSatellite) {
+            darkMap = checkThemeDark(configs);
+        }
+        adjustMapFilter(darkMap);
+    }, [configs, isSatellite]);
     return (
         <MapContainer
             center={{ lat: 51.166, lng: 10.452 }}
@@ -116,7 +161,10 @@ const Map: React.FC<Props> = ({
             {isSatellite ? (
                 <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
             ) : (
-                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    className="mapTiles"
+                />
             )}
             {children}
             <SatelliteButton
