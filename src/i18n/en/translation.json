@@ -25,6 +25,7 @@
             "head": "Travel Buddy can't reach the internet",
             "body": "Check your internet connection",
             "btn": "Try again"
-        }
+        },
+        "noSearchResult": "Sorry, that address could not be found."
     }
 }

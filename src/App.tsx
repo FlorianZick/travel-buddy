@@ -83,7 +83,12 @@ const App: React.FC = (): ReactElement => {
                         setModalOpen={setModalOpen}
                         setShowCurPosInformation={setShowCurPosInformation}
                     >
-                        <Menu />
+                        <Menu
+                            onLocationChange={setLocationInfo}
+                            onCurPosLocationChange={setCurPosLocationInfo}
+                            setModalOpen={setModalOpen}
+                            setShowCurPosInformation={setShowCurPosInformation}
+                        />
                         <SheetModal
                             data={
                                 showCurPosInformation

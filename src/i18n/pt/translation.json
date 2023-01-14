@@ -25,6 +25,7 @@
             "head": "Travel Buddy não pode chegar à Internet",
             "body": "Verifique a sua ligação à Internet",
             "btn": "Tente novamente"
-        }
+        },
+        "noSearchResult": "Desculpe, esse endereço não foi encontrado."
     }
 }

@@ -25,6 +25,7 @@
             "head": "Travel Buddy non riesce a raggiungere Internet",
             "body": "Controllare la connessione a Internet",
             "btn": "Riprova"
-        }
+        },
+        "noSearchResult": "Spiacenti, non è stato possibile trovare l'indirizzo."
     }
 }
