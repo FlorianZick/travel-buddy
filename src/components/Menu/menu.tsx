@@ -1,5 +1,5 @@
 import React, { ReactElement, useContext, useState } from "react";
-import Settings from "./Settings/settings";
+import Settings from "./Settings/Settings";
 import MenuButton from "./menuButton";
 import { useMap } from "react-leaflet";
 import { useTranslation } from "react-i18next";

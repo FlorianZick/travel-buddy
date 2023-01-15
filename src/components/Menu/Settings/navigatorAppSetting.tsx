@@ -1,24 +1,28 @@
 import React, { ReactElement, useContext } from "react";
 import { IonItem, IonLabel, IonSelect, IonSelectOption } from "@ionic/react";
-
-import { NavigatorApp } from "./../../ConfigContext/types";
-import { ConfigContext } from "./../../ConfigContext/ConfigContext";
-
 import { useTranslation } from "react-i18next";
 import L from "leaflet";
+import { NavigatorApp } from "../../ConfigContext/types";
+import { ConfigContext } from "../../ConfigContext/ConfigContext";
 
+/**
+ * Functional component for navigator settings
+ * @returns Navigator setting component
+ */
 const NavigatorAppSetting: React.FC = (): ReactElement => {
     const { t } = useTranslation();
     const { configs, setConfigs } = useContext(ConfigContext);
+    // Prevent map click propagation when clicking on navigator app select
     React.useEffect(() => {
-        const divRef = document.getElementById("navigatorIonSelect")!;
-        L.DomEvent.disableClickPropagation(divRef);
+        const navigatorAppSelect =
+            document.getElementById("navigatorAppSelect")!;
+        L.DomEvent.disableClickPropagation(navigatorAppSelect);
     });
     return (
         <IonItem style={{ margin: "0 20px" }}>
             <IonLabel>{t("settings.navigatorApp")}</IonLabel>
             <IonSelect
-                id="navigatorIonSelect"
+                id="navigatorAppSelect"
                 selectedText={configs.navigator}
                 onIonChange={(e) => {
                     configs.navigator = e.detail.value;

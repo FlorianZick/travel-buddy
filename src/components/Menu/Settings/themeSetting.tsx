@@ -1,24 +1,27 @@
 import React, { ReactElement, useContext } from "react";
 import { IonItem, IonLabel, IonSelect, IonSelectOption } from "@ionic/react";
-
+import { useTranslation } from "react-i18next";
+import L from "leaflet";
 import { Theme } from "../../ConfigContext/types";
 import { ConfigContext } from "../../ConfigContext/ConfigContext";
 
-import { useTranslation } from "react-i18next";
-import L from "leaflet";
-
+/**
+ * Functional component for dark mode settings
+ * @returns Dark mode settings component
+ */
 const DarkModeSetting: React.FC = (): ReactElement => {
     const { t } = useTranslation();
     const { configs, setConfigs } = useContext(ConfigContext);
+    // Prevent map click propagation when clicking on dark mode select
     React.useEffect(() => {
-        const divRef = document.getElementById("themeIonSelect")!;
-        L.DomEvent.disableClickPropagation(divRef);
+        const darkModeSelect = document.getElementById("darkModeSelect")!;
+        L.DomEvent.disableClickPropagation(darkModeSelect);
     });
     return (
         <IonItem style={{ margin: "0 20px" }}>
             <IonLabel>{t("settings.theme")}</IonLabel>
             <IonSelect
-                id="themeIonSelect"
+                id="darkModeSelect"
                 selectedText={configs.theme}
                 onIonChange={(e) => {
                     const theme = e.detail.value;
