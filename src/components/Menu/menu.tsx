@@ -3,6 +3,7 @@ import Settings from "./Settings/settings";
 import MenuButton from "./menuButton";
 import { useMap } from "react-leaflet";
 import { useTranslation } from "react-i18next";
+import { getLanguageCode } from "../../api/fetchWikiData";
 
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
 import { setDestinationPosition, getCurrentPosition } from "../RoutingMachine";
@@ -49,23 +50,7 @@ const SearchField = ({
     apiKey: any;
     t: any;
 }) => {
-    const provider = new OpenStreetMapProvider({
-        params: {
-            access_token: apiKey,
-            "accept-language": "de", // render results in German
-        },
-    });
-
-    // @ts-ignore
-    const searchControl = new GeoSearchControl({
-        provider: provider,
-        style: "bar",
-        showMarker: false,
-        showPopup: false,
-        notFoundMessage: t("errors.noSearchResult"),
-        updateMap: false,
-    });
-
+    const [lastControl, setLastControl] = useState<any>(null);
     const mapShowlocationCallback = (res: any) => {
         const curPos = getCurrentPosition();
         setDestinationPosition({ lat: res.location.y, lng: res.location.x });
@@ -87,10 +72,32 @@ const SearchField = ({
 
     const map = useMap();
     React.useEffect(() => {
+        if (lastControl) {
+            map.removeControl(lastControl);
+            console.log("Remove control");
+        }
+        const provider = new OpenStreetMapProvider({
+            params: {
+                access_token: apiKey,
+                "accept-language": getLanguageCode(configs.language),
+            },
+        });
+
+        // @ts-ignore
+        const searchControl = new GeoSearchControl({
+            provider: provider,
+            style: "bar",
+            showMarker: false,
+            showPopup: false,
+            notFoundMessage: t("errors.noSearchResult"),
+            updateMap: false,
+        });
+        setLastControl(searchControl);
+        console.log("Create control");
         map.addControl(searchControl);
         map.removeEventListener("geosearch/showlocation");
         map.on("geosearch/showlocation", mapShowlocationCallback);
-    }, []);
+    }, [configs.language]);
 
     async function loadLocationData(
         location: LatLng,

@@ -2,7 +2,7 @@ import { Language } from "../components/ConfigContext/types";
 import { WikiApiDataModel } from "../models/wikiApiDataModel";
 import { Params, WikiApiResponse } from "./apiTypes";
 
-function getLanguageCode(lang: Language): string {
+export function getLanguageCode(lang: Language): string {
     switch (lang) {
         case Language.EN:
             return "en";
