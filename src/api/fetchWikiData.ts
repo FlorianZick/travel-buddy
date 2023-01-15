@@ -2,30 +2,51 @@ import { Language } from "../components/ConfigContext/types";
 import { WikiApiDataModel } from "../models/wikiApiDataModel";
 import { Params, WikiApiResponse } from "./apiTypes";
 
+/**
+ * Get the language code for a language
+ * @param {Language} lang Language
+ * @returns {string} Language code in the form of a 2 character string
+ */
 export function getLanguageCode(lang: Language): string {
+    let code: string = "en";
     switch (lang) {
         case Language.EN:
-            return "en";
+            code = "en";
+            break;
         case Language.DE:
-            return "de";
+            code = "de";
+            break;
         case Language.FR:
-            return "fr";
+            code = "fr";
+            break;
         case Language.ES:
-            return "es";
+            code = "es";
+            break;
         case Language.IT:
-            return "it";
+            code = "it";
+            break;
         case Language.PT:
-            return "pt";
-        default:
-            return "en";
+            code = "pt";
+            break;
     }
+    return code;
 }
 
-function isTermInvalid(term: string): boolean {
+/**
+ * Checks if searchterm is invalid
+ * @param {string} term Searchterm
+ * @returns {boolean} Term is invalid
+ */
+function checkTermInvalid(term: string): boolean {
     const invalidTerms = [undefined, "undefined", "JavaScript", ""];
     return invalidTerms.includes(term);
 }
 
+/**
+ * Generates invalid term error message
+ * @param t Translater
+ * @returns {WikiApiDataModel[]} Invalid term error message
+ */
 function getInvalidTermErrorMessage(t: any): WikiApiDataModel[] {
     return [
         {
@@ -35,6 +56,11 @@ function getInvalidTermErrorMessage(t: any): WikiApiDataModel[] {
     ];
 }
 
+/**
+ * Generate data transmission error message
+ * @param t Translater
+ * @returns {WikiApiDataModel[]} Data transmission error message
+ */
 function getDataTransmissionErrorMessage(t: any): WikiApiDataModel[] {
     return [
         {
@@ -44,6 +70,13 @@ function getDataTransmissionErrorMessage(t: any): WikiApiDataModel[] {
     ];
 }
 
+/**
+ * Generate no information error message
+ * @param t Translator
+ * @param {string} url Url of wiki api which was called
+ * @param {string} term Searchterm
+ * @returns {WikiApiDataModel[]} No information error message
+ */
 function getNoInformationErrorMessage(
     t: any,
     url: string,
@@ -62,12 +95,19 @@ function getNoInformationErrorMessage(
     ];
 }
 
+/**
+ * Search wikipedia for searchterm
+ * @param t Trnaslator
+ * @param {string} term Searchterm
+ * @param {Language} lang Language
+ * @returns {Promise<WikiApiDataModel[]>} Wiki data
+ */
 export async function fetchWikiData(
     t: any,
     term: string,
     lang: Language
 ): Promise<WikiApiDataModel[]> {
-    if (isTermInvalid(term)) {
+    if (checkTermInvalid(term)) {
         return getInvalidTermErrorMessage(t);
     }
     let languageCode = getLanguageCode(lang);
