@@ -2,9 +2,9 @@ import { NominatimAddressModel } from "../models/nominatimAddressModel";
 
 /**
  * Determines Address from coordinates
- * @param {number} lat Map coordinates format "latitude"
- * @param {number} lon Map coordinates format "longitude"
- * @returns {Promise<NominatimAddressModel>} Address as Object
+ * @param lat Map coordinates format "latitude"
+ * @param lon Map coordinates format "longitude"
+ * @returns Address as Object
  */
 export async function reverseGeoEncoding(
     lat: number,

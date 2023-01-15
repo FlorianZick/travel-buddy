@@ -4,8 +4,8 @@ import { Params, WikiApiResponse } from "./apiTypes";
 
 /**
  * Get the language code for a language
- * @param {Language} lang Language
- * @returns {string} Language code in the form of a 2 character string
+ * @param lang Language
+ * @returns Language code in the form of a 2 character string
  */
 export function getLanguageCode(lang: Language): string {
     let code: string = "en";
@@ -34,8 +34,8 @@ export function getLanguageCode(lang: Language): string {
 
 /**
  * Checks if searchterm is invalid
- * @param {string} term Searchterm
- * @returns {boolean} Term is invalid
+ * @param term Searchterm
+ * @returns Term is invalid
  */
 function checkTermInvalid(term: string): boolean {
     const invalidTerms = [undefined, "undefined", "JavaScript", ""];
@@ -45,7 +45,7 @@ function checkTermInvalid(term: string): boolean {
 /**
  * Generates invalid term error message
  * @param t Translater
- * @returns {WikiApiDataModel[]} Invalid term error message
+ * @returns Invalid term error message
  */
 function getInvalidTermErrorMessage(t: any): WikiApiDataModel[] {
     return [
@@ -59,7 +59,7 @@ function getInvalidTermErrorMessage(t: any): WikiApiDataModel[] {
 /**
  * Generate data transmission error message
  * @param t Translater
- * @returns {WikiApiDataModel[]} Data transmission error message
+ * @returns Data transmission error message
  */
 function getDataTransmissionErrorMessage(t: any): WikiApiDataModel[] {
     return [
@@ -73,9 +73,9 @@ function getDataTransmissionErrorMessage(t: any): WikiApiDataModel[] {
 /**
  * Generate no information error message
  * @param t Translator
- * @param {string} url Url of wiki api which was called
- * @param {string} term Searchterm
- * @returns {WikiApiDataModel[]} No information error message
+ * @param url Url of wiki api which was called
+ * @param term Searchterm
+ * @returns No information error message
  */
 function getNoInformationErrorMessage(
     t: any,
@@ -98,9 +98,9 @@ function getNoInformationErrorMessage(
 /**
  * Search wikipedia for searchterm
  * @param t Trnaslator
- * @param {string} term Searchterm
- * @param {Language} lang Language
- * @returns {Promise<WikiApiDataModel[]>} Wiki data
+ * @param term Searchterm
+ * @param lang Language
+ * @returns Wiki data
  */
 export async function fetchWikiData(
     t: any,
