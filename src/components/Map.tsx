@@ -164,11 +164,15 @@ const Map: React.FC<Props> = ({
             zoomControl={false}
         >
             {isSatellite ? (
-                <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
+                <TileLayer
+                    url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                    minZoom={3}
+                />
             ) : (
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     className="mapTiles"
+                    minZoom={3}
                 />
             )}
             {children}
