@@ -7,6 +7,7 @@ declare let L: any;
 
 var routingControl: any;
 
+// var routeSummary: any = null;
 var redIcon = new L.Icon({
     iconUrl:
         "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
@@ -42,6 +43,18 @@ function createRoutineMachineLayer() {
             }
         },
     });
+    // routingControl.on("routesfound", function (e: any) {
+    //     let routes = e.routes;
+    //     let summary = routes[0].summary;
+    //     let distance = (summary.totalDistance / 1000).toFixed(2) + " km";
+    //     let hours =
+    //         Math.floor(summary.totalTime / 3600) > 0
+    //             ? Math.floor(summary.totalTime / 3600) + " h"
+    //             : "";
+    //     let mins = Math.round((summary.totalTime % 3600) / 60) + " min";
+    //     routeSummary = { distance: distance, time: hours + " " + mins };
+    //     console.log(routeSummary);
+    // });
     return routingControl;
 }
 

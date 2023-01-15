@@ -4,3 +4,6 @@
 #settingsIcon {
     color: #222428 !important;
 }
+#settingsIcon.darkTheme {
+    color: #fff !important;
+}

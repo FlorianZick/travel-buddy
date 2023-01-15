@@ -207,6 +207,11 @@
     display: block;
     border-radius: 20px;
 }
+
+.darkForm {
+    filter: var(--map-tiles-filter, none);
+}
+
 /*Breite der Searchbar*/
 .leaflet-geosearch-bar form input {
     min-width: 75%;

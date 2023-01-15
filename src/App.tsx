@@ -72,37 +72,37 @@ const App: React.FC = (): ReactElement => {
 
     return (
         <>
-            <Offline>
+            {/* <Offline>
                 <NoInternetConnection />
             </Offline>
-            <Online>
-                <IonApp>
-                    <Map
+            <Online> */}
+            <IonApp>
+                <Map
+                    onLocationChange={setLocationInfo}
+                    onCurPosLocationChange={setCurPosLocationInfo}
+                    setModalOpen={setModalOpen}
+                    setShowCurPosInformation={setShowCurPosInformation}
+                >
+                    <Menu
                         onLocationChange={setLocationInfo}
                         onCurPosLocationChange={setCurPosLocationInfo}
                         setModalOpen={setModalOpen}
                         setShowCurPosInformation={setShowCurPosInformation}
-                    >
-                        <Menu
-                            onLocationChange={setLocationInfo}
-                            onCurPosLocationChange={setCurPosLocationInfo}
-                            setModalOpen={setModalOpen}
-                            setShowCurPosInformation={setShowCurPosInformation}
-                        />
-                        <SheetModal
-                            data={
-                                showCurPosInformation
-                                    ? curPosLocationInfo
-                                    : locationInfo
-                            }
-                            isModalOpen={isModalOpen}
-                            setModalOpen={setModalOpen}
-                            showCurPosInformation={showCurPosInformation}
-                            setShowCurPosInformation={setShowCurPosInformation}
-                        />
-                    </Map>
-                </IonApp>
-            </Online>
+                    />
+                    <SheetModal
+                        data={
+                            showCurPosInformation
+                                ? curPosLocationInfo
+                                : locationInfo
+                        }
+                        isModalOpen={isModalOpen}
+                        setModalOpen={setModalOpen}
+                        showCurPosInformation={showCurPosInformation}
+                        setShowCurPosInformation={setShowCurPosInformation}
+                    />
+                </Map>
+            </IonApp>
+            {/* </Online> */}
         </>
     );
 };

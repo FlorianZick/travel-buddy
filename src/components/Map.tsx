@@ -133,7 +133,7 @@ const Map: React.FC<Props> = ({
 }): React.ReactElement => {
     const [isSatellite, setIsSatellite] = React.useState(false);
     const { configs } = useContext(ConfigContext);
-    async function adjustMapFilter(darkMap: boolean) {
+    async function changeThemeFilter(darkMap: boolean, darkTheme: boolean) {
         await getElementByClassNameAsync("leaflet-layer mapTiles").then(
             (tilesRef) => {
                 if (tilesRef) {
@@ -141,14 +141,19 @@ const Map: React.FC<Props> = ({
                 }
             }
         );
+        document.querySelector("form")?.classList.toggle("darkForm", darkTheme);
+        document
+            .getElementById("settingsIcon")
+            ?.classList.toggle("darkTheme", darkTheme);
     }
 
     React.useEffect(() => {
         let darkMap = false;
+        let darkTheme = checkThemeDark(configs);
         if (!isSatellite) {
-            darkMap = checkThemeDark(configs);
+            darkMap = darkTheme;
         }
-        adjustMapFilter(darkMap);
+        changeThemeFilter(darkMap, darkTheme);
     }, [configs, isSatellite]);
     return (
         <MapContainer

@@ -74,7 +74,6 @@ const SearchField = ({
     React.useEffect(() => {
         if (lastControl) {
             map.removeControl(lastControl);
-            console.log("Remove control");
         }
         const provider = new OpenStreetMapProvider({
             params: {
