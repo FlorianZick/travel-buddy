@@ -1,4 +1,3 @@
-import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
@@ -13,6 +12,7 @@ import {
     NavigatorApp,
     Theme,
 } from "./components/ConfigContext/types";
+import InformationsProvider from "./components/InformationContext/InformationContext";
 
 // enum for the component mode
 enum Mode {
@@ -68,11 +68,11 @@ const root = createRoot(container!);
 root.render(
     // React strict mode will render twice in development phase, comment out to prevent this behaviour
     // <React.StrictMode>
-    <>
+    <InformationsProvider>
         <ConfigsProvider configJson={configData}>
             <App />
         </ConfigsProvider>
-    </>
+    </InformationsProvider>
     // </React.StrictMode>
 );
 

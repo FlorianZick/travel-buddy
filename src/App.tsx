@@ -1,5 +1,4 @@
 import { IonApp, setupIonicReact } from "@ionic/react";
-import { Online, Offline } from "react-detect-offline";
 
 import Map from "./components/Map";
 import SheetModal from "./components/SheetModal/SheetModal";
@@ -31,8 +30,8 @@ import { WikiApiDataModel } from "./models/wikiApiDataModel";
 import Menu from "./components/Menu/Menu";
 import { useTranslation } from "react-i18next";
 import { ConfigContext } from "./components/ConfigContext/ConfigContext";
+import { InformationContext } from "./components/InformationContext";
 import { Theme } from "./components/ConfigContext/types";
-import NoInternetConnection from "./components/NoInternetConnection";
 
 setupIonicReact();
 
@@ -46,10 +45,10 @@ const App: React.FC = (): ReactElement => {
     const [showCurPosInformation, setShowCurPosInformation] =
         useState<boolean>(true);
 
-    const [isModalOpen, setModalOpen] = useState<boolean>(false);
-
     const { i18n } = useTranslation();
     const { configs } = useContext(ConfigContext);
+    const { informations } = useContext(InformationContext);
+    // const [isModalOpen, setModalOpen] = useState<boolean>(false);  // was replaced by informations context
 
     useEffect(() => {
         i18n.changeLanguage(configs.language);
@@ -80,13 +79,13 @@ const App: React.FC = (): ReactElement => {
                 <Map
                     onLocationChange={setLocationInfo}
                     onCurPosLocationChange={setCurPosLocationInfo}
-                    setModalOpen={setModalOpen}
+                    setModalOpen={informations.setIsModalOpen}
                     setShowCurPosInformation={setShowCurPosInformation}
                 >
                     <Menu
                         onLocationChange={setLocationInfo}
                         onCurPosLocationChange={setCurPosLocationInfo}
-                        setModalOpen={setModalOpen}
+                        setModalOpen={informations.setIsModalOpen}
                         setShowCurPosInformation={setShowCurPosInformation}
                     />
                     <SheetModal
@@ -95,8 +94,8 @@ const App: React.FC = (): ReactElement => {
                                 ? curPosLocationInfo
                                 : locationInfo
                         }
-                        isModalOpen={isModalOpen}
-                        setModalOpen={setModalOpen}
+                        isModalOpen={informations.isModalOpen}
+                        setModalOpen={informations.setIsModalOpen}
                         showCurPosInformation={showCurPosInformation}
                         setShowCurPosInformation={setShowCurPosInformation}
                     />
