@@ -74,7 +74,7 @@ const App: React.FC = (): ReactElement => {
             <Map
                 onLocationChange={setLocationInfo}
                 onCurPosLocationChange={setCurPosLocationInfo}
-                setModalOpen={setModalOpen}
+                setModalOpen={informations.setIsModalOpen}
                 setShowCurPosInformation={setShowCurPosInformation}
             >
                 <Menu
@@ -82,28 +82,20 @@ const App: React.FC = (): ReactElement => {
                     onCurPosLocationChange={setCurPosLocationInfo}
                     setModalOpen={informations.setIsModalOpen}
                     setShowCurPosInformation={setShowCurPosInformation}
-                >
-                    <Menu
-                        onLocationChange={setLocationInfo}
-                        onCurPosLocationChange={setCurPosLocationInfo}
-                        setModalOpen={informations.setIsModalOpen}
-                        setShowCurPosInformation={setShowCurPosInformation}
-                    />
-                    <SheetModal
-                        data={
-                            showCurPosInformation
-                                ? curPosLocationInfo
-                                : locationInfo
-                        }
-                        isModalOpen={informations.isModalOpen}
-                        setModalOpen={informations.setIsModalOpen}
-                        showCurPosInformation={showCurPosInformation}
-                        setShowCurPosInformation={setShowCurPosInformation}
-                    />
-                </Map>
-            </IonApp>
-            {/* </Online> */}
-        </>
+                />
+                <SheetModal
+                    data={
+                        showCurPosInformation
+                            ? curPosLocationInfo
+                            : locationInfo
+                    }
+                    isModalOpen={informations.isModalOpen}
+                    setModalOpen={informations.setIsModalOpen}
+                    showCurPosInformation={showCurPosInformation}
+                    setShowCurPosInformation={setShowCurPosInformation}
+                />
+            </Map>
+        </IonApp>
     );
 };
 
