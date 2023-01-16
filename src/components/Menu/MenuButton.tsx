@@ -4,22 +4,29 @@ import { menu } from "ionicons/icons";
 import L from "leaflet";
 import "./menuButton.css";
 
-// interface for props
+/**
+ * Interface for props
+ */
 interface Props {
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * Functional component for menu button
+ * @param param0 Object with setIsOpen
+ * @returns MenuButton component
+ */
 const MenuButton: React.FC<Props> = ({ setIsOpen }): ReactElement => {
     React.useEffect(() => {
-        const divRef = document.getElementById("menuButton")!;
-        L.DomEvent.disableClickPropagation(divRef);
+        const menuFab = document.getElementById("menuFab")!;
+        L.DomEvent.disableClickPropagation(menuFab);
     });
     return (
         <IonFab
             slot="fixed"
             onClick={() => setIsOpen(true)}
             class="menuBtn"
-            id="menuButton"
+            id="menuFab"
         >
             <IonFabButton
                 size="small"

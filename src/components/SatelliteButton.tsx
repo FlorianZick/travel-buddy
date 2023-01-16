@@ -1,27 +1,35 @@
 import React, { ReactElement } from "react";
 import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
-import { map, mapOutline } from "ionicons/icons";
+import { earth, earthOutline } from "ionicons/icons";
 import L from "leaflet";
 import "./satelliteButton.css";
 
-// interface for props
+/**
+ * Interface for props
+ */
 interface Props {
     isSatellite: boolean;
     setIsSatellite: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * Functional component for satellite button
+ * @param param0 Object with isSatellite and setIsSatellite states
+ * @returns SatelliteButton component
+ */
 const SatelliteButton: React.FC<Props> = ({
     isSatellite,
     setIsSatellite,
 }): ReactElement => {
+    // Prevent map click propagation when clicking on satellite button
     React.useEffect(() => {
-        const divRef = document.getElementById("satelliteBtn")!;
-        L.DomEvent.disableClickPropagation(divRef);
+        const satelliteFab = document.getElementById("satelliteFab")!;
+        L.DomEvent.disableClickPropagation(satelliteFab);
     });
     return (
-        <IonFab slot="fixed" id="satelliteBtn">
+        <IonFab slot="fixed" id="satelliteFab">
             <IonFabButton onClick={() => setIsSatellite(!isSatellite)}>
-                <IonIcon icon={isSatellite ? mapOutline : map}></IonIcon>
+                <IonIcon icon={isSatellite ? earthOutline : earth}></IonIcon>
             </IonFabButton>
         </IonFab>
     );

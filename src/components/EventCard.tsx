@@ -6,12 +6,19 @@ import {
     IonCardTitle,
 } from "@ionic/react";
 
-// interface for props
+/**
+ * Interface for props
+ */
 interface Props {
     title: string;
     snippet: string;
 }
 
+/**
+ * Functional component for event card
+ * @param param0 Object with title and snippet
+ * @returns EventCard component
+ */
 const EventCard: React.FC<Props> = ({ title, snippet }): React.ReactElement => {
     return (
         <IonCard style={{ margin: 0 }}>

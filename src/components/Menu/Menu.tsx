@@ -15,6 +15,9 @@ import { setDestinationPosition, getCurrentPosition } from "../RoutingMachine";
 import "./menu.css";
 import "./leafletGeosearch.css";
 
+/**
+ * Interface for props
+ */
 interface Props {
     onLocationChange: React.Dispatch<
         React.SetStateAction<WikiApiDataModel[] | null>

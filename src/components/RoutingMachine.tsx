@@ -5,9 +5,9 @@ import "leaflet-routing-machine";
 import "./routingMachine.css";
 declare let L: any;
 
+// routing control
 var routingControl: any;
-
-// var routeSummary: any = null;
+// red icon for destination marker
 var redIcon = new L.Icon({
     iconUrl:
         "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
@@ -18,15 +18,21 @@ var redIcon = new L.Icon({
     popupAnchor: [1, -34],
     shadowSize: [41, 41],
 });
+// route styles for route color between markers
+var routeStyles = [
+    { color: "#1E4B6F", opacity: 0.8, weight: 7 },
+    { color: "#4CAEFD", opacity: 1, weight: 4 },
+];
 
+/**
+ * Create routing machine layer
+ * @returns routing control
+ */
 function createRoutineMachineLayer() {
     routingControl = L.Routing.control({
         waypoints: [null],
         lineOptions: {
-            styles: [
-                { color: "#1E4B6F", opacity: 0.8, weight: 7 },
-                { color: "#4CAEFD", opacity: 1, weight: 4 },
-            ],
+            styles: routeStyles,
         },
         show: true,
         collapsible: false,
@@ -35,53 +41,67 @@ function createRoutineMachineLayer() {
         draggableWaypoints: false,
         fitSelectedRoutes: true,
         showAlternatives: false,
-        createMarker: function (i: number, wp: any, n: number) {
-            if (i === 0 || i < n - 1) {
-                return L.marker(wp.latLng);
-            } else {
-                return L.marker(wp.latLng, { icon: redIcon });
-            }
-        },
+        createMarker: customCreateMarker,
     });
-    // routingControl.on("routesfound", function (e: any) {
-    //     let routes = e.routes;
-    //     let summary = routes[0].summary;
-    //     let distance = (summary.totalDistance / 1000).toFixed(2) + " km";
-    //     let hours =
-    //         Math.floor(summary.totalTime / 3600) > 0
-    //             ? Math.floor(summary.totalTime / 3600) + " h"
-    //             : "";
-    //     let mins = Math.round((summary.totalTime % 3600) / 60) + " min";
-    //     routeSummary = { distance: distance, time: hours + " " + mins };
-    //     console.log(routeSummary);
-    // });
     return routingControl;
 }
 
+/**
+ * Create custom marker for routing
+ * @param i current marker count
+ * @param wp waypoint with latitude and longitude
+ * @param n total number of markers
+ * @returns marker
+ */
+function customCreateMarker(i: number, wp: any, n: number) {
+    if (i === 0 || i < n - 1) {
+        return L.marker(wp.latLng);
+    } else {
+        return L.marker(wp.latLng, { icon: redIcon });
+    }
+}
+
+/**
+ * Set current position
+ * @param pos position
+ */
 export function setCurrentPosition(pos: any) {
     routingControl.setWaypoints([L.latLng(pos.lat, pos.lng)]);
     routingControl._container.style.display = "None";
 }
 
+/**
+ * Get current position
+ * @returns current position or null
+ */
 export function getCurrentPosition() {
     let curPos = routingControl.getWaypoints()[0].latLng;
     return curPos !== null ? curPos : null;
 }
 
+/**
+ * Set destination position
+ * @param pos position
+ */
 export function setDestinationPosition(pos: any) {
     let curPos = routingControl.getWaypoints()[0].latLng;
-    // console.log(curPos);
     if (curPos !== null) {
         routingControl.setWaypoints([
             L.latLng(curPos.lat, curPos.lng),
             L.latLng(pos.lat, pos.lng),
         ]);
     } else {
-        routingControl.setWaypoints([L.latLng(pos.lat, pos.lng)]);
+        setCurrentPosition(pos);
     }
     routingControl._container.style.display = "None";
 }
 
+/**
+ * Get google maps url
+ * @param curPos current position
+ * @param destPos destination position
+ * @returns Url for google maps navigator app
+ */
 function getGoogleMapsUrl(curPos: any, destPos: any): string {
     return (
         "https://www.google.com/maps/dir/?api=1&origin=" +
@@ -96,6 +116,12 @@ function getGoogleMapsUrl(curPos: any, destPos: any): string {
     );
 }
 
+/**
+ * Get apple maps url
+ * @param curPos current position
+ * @param destPos destination position
+ * @returns url for apple maps navigator app
+ */
 function getAppleMapsUrl(curPos: any, destPos: any): string {
     return (
         "http://maps.apple.com/?saddr=" +
@@ -109,6 +135,12 @@ function getAppleMapsUrl(curPos: any, destPos: any): string {
     );
 }
 
+/**
+ * Get waze navigator url
+ * @param curPos current position
+ * @param destPos destination position
+ * @returns url for waze navigator app
+ */
 function getWazeUrl(curPos: any, destPos: any): string {
     return (
         "https://www.waze.com/de/live-map/directions?to=ll." +
@@ -122,6 +154,10 @@ function getWazeUrl(curPos: any, destPos: any): string {
     );
 }
 
+/**
+ * Export route to one of the three navigator apps
+ * @param navigator navigator app
+ */
 export function exportRoute(navigator: NavigatorApp) {
     const waypoints = routingControl.getWaypoints();
     const curPos = waypoints[0].latLng;
@@ -135,6 +171,7 @@ export function exportRoute(navigator: NavigatorApp) {
     }
 }
 
+// Create routing machine
 const RoutingMachine = createControlComponent(createRoutineMachineLayer);
 
 export default RoutingMachine;

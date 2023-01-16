@@ -12,6 +12,10 @@
     color: #fff !important;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
+    margin: 0;
+    font-weight: 900;
+    font-size: 1.5rem;
+    font-family: Roboto, sans-serif;
 }
 
 @media screen and (max-width: 600px) {

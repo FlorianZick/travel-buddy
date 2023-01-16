@@ -17,13 +17,16 @@ import RoutingMachine, {
 import SatelliteButton from "./SatelliteButton";
 import "./map.css";
 
+// Set correct icons for leaflet
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
     iconUrl: require("leaflet/dist/images/marker-icon.png"),
     shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-// interface for props
+/**
+ * Interface for props
+ */
 interface Props {
     onLocationChange: React.Dispatch<
         React.SetStateAction<WikiApiDataModel[] | null>
@@ -98,6 +101,11 @@ function LocationMarker(props: Props) {
     return null;
 }
 
+/**
+ * Check is current theme is dark
+ * @param configs config context
+ * @returns is dark
+ */
 function checkThemeDark(configs: any) {
     let isDark = false;
     if (configs.theme === Theme.DARK) {
@@ -110,6 +118,11 @@ function checkThemeDark(configs: any) {
     return isDark;
 }
 
+/**
+ * Get element by class name once it has finished loading
+ * @param className class name
+ * @returns element
+ */
 async function getElementByClassNameAsync(className: string): Promise<Element> {
     return new Promise((resolve) => {
         const getElement = () => {
