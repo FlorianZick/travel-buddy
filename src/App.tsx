@@ -36,6 +36,8 @@ import { Theme } from "./components/ConfigContext/types";
 setupIonicReact();
 
 const App: React.FC = (): ReactElement => {
+    const { configs } = useContext(ConfigContext);
+    const { i18n } = useTranslation();
     const [locationInfo, setLocationInfo] = useState<WikiApiDataModel[] | null>(
         null
     );
@@ -45,8 +47,6 @@ const App: React.FC = (): ReactElement => {
     const [showCurPosInformation, setShowCurPosInformation] =
         useState<boolean>(true);
 
-    const { i18n } = useTranslation();
-    const { configs } = useContext(ConfigContext);
     const { informations } = useContext(InformationContext);
     // const [isModalOpen, setModalOpen] = useState<boolean>(false);  // was replaced by informations context
 
@@ -70,13 +70,14 @@ const App: React.FC = (): ReactElement => {
     });
 
     return (
-        <>
-            {/* <Offline>
-                <NoInternetConnection />
-            </Offline>
-            <Online> */}
-            <IonApp>
-                <Map
+        <IonApp>
+            <Map
+                onLocationChange={setLocationInfo}
+                onCurPosLocationChange={setCurPosLocationInfo}
+                setModalOpen={setModalOpen}
+                setShowCurPosInformation={setShowCurPosInformation}
+            >
+                <Menu
                     onLocationChange={setLocationInfo}
                     onCurPosLocationChange={setCurPosLocationInfo}
                     setModalOpen={informations.setIsModalOpen}

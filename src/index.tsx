@@ -3,7 +3,6 @@ import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { setupIonicReact } from "@ionic/react";
-
 import ConfigsProvider from "./components/ConfigContext/ConfigContext";
 import {
     Config,
@@ -14,13 +13,18 @@ import {
 } from "./components/ConfigContext/types";
 import InformationsProvider from "./components/InformationContext/InformationContext";
 
-// enum for the component mode
+/**
+ * Enum for the component mode
+ */
 enum Mode {
     IOS = "ios",
     MD = "md",
 }
 
-// checks if the device is an apple device
+/**
+ * Checks if the device is an apple device
+ * @returns is apple device
+ */
 function isAppleDevice(): boolean {
     return (
         [
@@ -36,7 +40,10 @@ function isAppleDevice(): boolean {
     );
 }
 
-// returns the mode based on the device
+/**
+ * Detecs the mode based on the device
+ * @returns device mode
+ */
 function detectMode(): Mode {
     if (isAppleDevice()) {
         return Mode.IOS;
@@ -45,13 +52,14 @@ function detectMode(): Mode {
     }
 }
 
-// sets the mode
+/**
+ * Set device mode
+ */
 setupIonicReact({
     mode: detectMode(),
 });
 
 // read config data from local storage
-
 const configStorageData = localStorage.getItem("configs");
 
 const configData: Config = configStorageData

@@ -20,6 +20,9 @@ import L from "leaflet";
 import { useMap } from "react-leaflet";
 import { getCurrentPosition } from "../RoutingMachine";
 
+/**
+ * Interface for props
+ */
 interface Props {
     data: WikiApiDataModel[] | null;
     isModalOpen: boolean;
@@ -37,9 +40,10 @@ const SheetModal: React.FC<Props> = ({
 }): React.ReactElement => {
     const map = useMap();
     const modal = React.useRef(null);
+    // Prevent map click propagation when clicking on sheet modal
     React.useEffect(() => {
-        const divRef = document.getElementById("sheetModalDiv")!;
-        L.DomEvent.disableClickPropagation(divRef);
+        const sheetModalDiv = document.getElementById("sheetModalDiv")!;
+        L.DomEvent.disableClickPropagation(sheetModalDiv);
     });
     return (
         <div id="sheetModalDiv">
@@ -60,17 +64,7 @@ const SheetModal: React.FC<Props> = ({
             </IonFab>
             <IonFab slot="fixed" class="nameTag">
                 <IonText color="dark">
-                    <h1
-                        style={{
-                            margin: 0,
-                            fontWeight: 900,
-                            fontSize: "1.5rem",
-                            fontFamily: "Roboto, sans-serif",
-                        }}
-                        id="logo"
-                    >
-                        Travel Buddy
-                    </h1>
+                    <h1 id="logo">Travel Buddy</h1>
                 </IonText>
             </IonFab>
             <IonModal

@@ -12,19 +12,28 @@ import { navigateCircleOutline } from "ionicons/icons";
 import { exportRoute } from "../RoutingMachine";
 import { useContext } from "react";
 import { ConfigContext } from "../ConfigContext";
-// import { getCurrentPosition } from "../RoutingMachine";
 
-// interface for props
+/**
+ * Interface for props
+ */
 interface Props {
     title: string | undefined;
     showCurPosInformation: boolean;
 }
 
+/**
+ * Functional component for header
+ * @param param0 Object with title and showCurPosInformation
+ * @returns Header component
+ */
 const Header: React.FC<Props> = ({
     title,
     showCurPosInformation,
 }): ReactElement => {
     const { configs, setConfigs } = useContext(ConfigContext);
+    /**
+     * Export route to navigator app
+     */
     function exportRouteToNavigatorApp() {
         exportRoute(configs.navigator);
     }
@@ -47,33 +56,11 @@ const Header: React.FC<Props> = ({
                     <IonRow
                         style={{ justifyContent: "center", height: "56px" }}
                     >
-                        {/* <IonText
-                            style={{
-                                fontWeight: 300,
-                                fontSize: "1rem",
-                                fontFamily: "Roboto, sans-serif",
-                                color: "white",
-                                margin: "auto auto auto 20px",
-                            }}
-                        >
-                            23 h 59 min
-                        </IonText> */}
                         <IonFab>
                             <IonFabButton onClick={exportRouteToNavigatorApp}>
                                 <IonIcon icon={navigateCircleOutline}></IonIcon>
                             </IonFabButton>
                         </IonFab>
-                        {/* <IonText
-                            style={{
-                                fontWeight: 300,
-                                fontSize: "1rem",
-                                fontFamily: "Roboto, sans-serif",
-                                color: "white",
-                                margin: "auto 20px auto auto",
-                            }}
-                        >
-                            99999.99 km
-                        </IonText> */}
                     </IonRow>
                 )}
             </IonGrid>
