@@ -13,9 +13,9 @@ import {
 import { locationOutline } from "ionicons/icons";
 import "typeface-roboto";
 import "./sheetModal.css";
-import Eventcard from "../Eventcard";
+import EventCard from "../EventCard";
 import { WikiApiDataModel } from "../../models/wikiApiDataModel";
-import Header from "./header";
+import Header from "./Header";
 import L from "leaflet";
 import { useMap } from "react-leaflet";
 import { getCurrentPosition } from "../RoutingMachine";
@@ -92,7 +92,7 @@ const SheetModal: React.FC<Props> = ({
                         {data?.map((item, i) => (
                             <IonItem key={i}>
                                 <IonLabel>
-                                    <Eventcard
+                                    <EventCard
                                         title={item.title}
                                         snippet={item.snippet}
                                     />

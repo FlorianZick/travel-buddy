@@ -208,10 +208,6 @@
     border-radius: 20px;
 }
 
-.darkForm {
-    filter: var(--map-tiles-filter, none);
-}
-
 /*Breite der Searchbar*/
 .leaflet-geosearch-bar form input {
     min-width: 75%;
@@ -252,6 +248,11 @@
 
 .leaflet-control-geosearch button.reset:hover {
     background: #f5f5f5;
+}
+
+/* Dark searchbar for dark mode*/
+.darkForm {
+    filter: var(--map-tiles-filter, none);
 }
 
 @media (max-width: 800px) {

@@ -14,7 +14,7 @@ import RoutingMachine, {
     setCurrentPosition,
     setDestinationPosition,
 } from "./RoutingMachine";
-import SatelliteButton from "./satelliteButton";
+import SatelliteButton from "./SatelliteButton";
 import "./map.css";
 
 L.Icon.Default.mergeOptions({

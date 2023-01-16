@@ -12,7 +12,7 @@ interface Props {
     snippet: string;
 }
 
-const Eventcard: React.FC<Props> = ({ title, snippet }): React.ReactElement => {
+const EventCard: React.FC<Props> = ({ title, snippet }): React.ReactElement => {
     return (
         <IonCard style={{ margin: 0 }}>
             <IonCardHeader style={{ paddingTop: 0 }}>
@@ -23,4 +23,4 @@ const Eventcard: React.FC<Props> = ({ title, snippet }): React.ReactElement => {
     );
 };
 
-export default Eventcard;
+export default EventCard;

@@ -1,21 +1,19 @@
 import React, { ReactElement, useContext, useState } from "react";
 import Settings from "./Settings/Settings";
-import MenuButton from "./menuButton";
-import { useMap } from "react-leaflet";
 import { useTranslation } from "react-i18next";
-import { getLanguageCode } from "../../api/fetchWikiData";
-
-import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
-import { setDestinationPosition, getCurrentPosition } from "../RoutingMachine";
-import "./leaflet-geosearch.css";
-
-import "./menu.css";
-import { reverseGeoEncoding } from "../../api/reverseGeoEncoding";
-import { fetchWikiData } from "../../api/fetchWikiData";
 import L, { LatLng } from "leaflet";
+import { useMap } from "react-leaflet";
+import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
+import MenuButton from "./MenuButton";
 import { Language } from "../ConfigContext/types";
+import { fetchWikiData } from "../../api/fetchWikiData";
+import { getLanguageCode } from "../../api/fetchWikiData";
 import { WikiApiDataModel } from "../../models/wikiApiDataModel";
+import { reverseGeoEncoding } from "../../api/reverseGeoEncoding";
 import { ConfigContext } from "../ConfigContext";
+import { setDestinationPosition, getCurrentPosition } from "../RoutingMachine";
+import "./menu.css";
+import "./leafletGeosearch.css";
 
 interface Props {
     onLocationChange: React.Dispatch<

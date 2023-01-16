@@ -28,7 +28,7 @@ import "./i18n/config";
 import "./theme/variables.css";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { WikiApiDataModel } from "./models/wikiApiDataModel";
-import Menu from "./components/Menu/menu";
+import Menu from "./components/Menu/Menu";
 import { useTranslation } from "react-i18next";
 import { ConfigContext } from "./components/ConfigContext/ConfigContext";
 import { Theme } from "./components/ConfigContext/types";
