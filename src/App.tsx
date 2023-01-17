@@ -36,67 +36,72 @@ import { Theme } from "./components/ConfigContext/types";
 setupIonicReact();
 
 const App: React.FC = (): ReactElement => {
-    const { configs } = useContext(ConfigContext);
-    const { i18n } = useTranslation();
-    const [locationInfo, setLocationInfo] = useState<WikiApiDataModel[] | null>(
-        null
-    );
-    const [curPosLocationInfo, setCurPosLocationInfo] = useState<
-        WikiApiDataModel[] | null
-    >(null);
-    const [showCurPosInformation, setShowCurPosInformation] =
-        useState<boolean>(true);
+  const { configs } = useContext(ConfigContext);
+  const { i18n } = useTranslation();
+  const [locationInfo, setLocationInfo] = useState<WikiApiDataModel[] | null>(
+    null
+  );
+  const [curPosLocationInfo, setCurPosLocationInfo] = useState<
+    WikiApiDataModel[] | null
+  >(null);
+  const [showCurPosInformation, setShowCurPosInformation] =
+    useState<boolean>(true);
 
-    const { informations } = useContext(InformationContext);
-    // const [isModalOpen, setModalOpen] = useState<boolean>(false);  // was replaced by informations context
+  const { informations, setInformations } = useContext(InformationContext);
+  const [isModalOpen, setModalOpen] = useState<boolean>(
+    informations.isModalOpen
+  );
 
-    useEffect(() => {
-        i18n.changeLanguage(configs.language);
-    }, []);
-
-    useEffect(() => {
-        const theme = configs.theme;
-
-        if (theme === Theme.LIGHT) {
-            document.body.classList.toggle("dark", false);
-        } else if (theme === Theme.DARK) {
-            document.body.classList.toggle("dark", true);
-        } else if (theme === Theme.SYSTEM_SETTING) {
-            const prefersDark = window.matchMedia(
-                "(prefers-color-scheme: dark)"
-            );
-            document.body.classList.toggle("dark", prefersDark.matches);
-        }
+  React.useEffect(() => {
+    setInformations({
+      isModalOpen: isModalOpen,
+      locationInfo: locationInfo,
+      curPosInformationInfo: curPosLocationInfo,
+      showCurPosInformation: showCurPosInformation,
     });
+  }, [isModalOpen, locationInfo, curPosLocationInfo, showCurPosInformation]);
 
-    return (
-        <IonApp>
-            <Map
-                onLocationChange={setLocationInfo}
-                onCurPosLocationChange={setCurPosLocationInfo}
-                setModalOpen={informations.setIsModalOpen}
-                setShowCurPosInformation={setShowCurPosInformation}
-            >
-                <Menu
-                    onLocationChange={setLocationInfo}
-                    onCurPosLocationChange={setCurPosLocationInfo}
-                    setModalOpen={informations.setIsModalOpen}
-                    setShowCurPosInformation={setShowCurPosInformation}
-                />
-                <SheetModal
-                    data={
-                        showCurPosInformation
-                            ? curPosLocationInfo
-                            : locationInfo
-                    }
-                    isModalOpen={informations.isModalOpen}
-                    setModalOpen={informations.setIsModalOpen}
-                    showCurPosInformation={showCurPosInformation}
-                    setShowCurPosInformation={setShowCurPosInformation}
-                />
-            </Map>
-        </IonApp>
-    );
+  useEffect(() => {
+    i18n.changeLanguage(configs.language);
+  }, []);
+
+  useEffect(() => {
+    const theme = configs.theme;
+
+    if (theme === Theme.LIGHT) {
+      document.body.classList.toggle("dark", false);
+    } else if (theme === Theme.DARK) {
+      document.body.classList.toggle("dark", true);
+    } else if (theme === Theme.SYSTEM_SETTING) {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+      document.body.classList.toggle("dark", prefersDark.matches);
+    }
+  });
+
+  return (
+    <IonApp>
+      <Map
+        onLocationChange={setLocationInfo}
+        onCurPosLocationChange={setCurPosLocationInfo}
+        setModalOpen={setModalOpen}
+        setShowCurPosInformation={setShowCurPosInformation}
+      >
+        <Menu
+          onLocationChange={setLocationInfo}
+          onCurPosLocationChange={setCurPosLocationInfo}
+          setModalOpen={setModalOpen}
+          setShowCurPosInformation={setShowCurPosInformation}
+        />
+        <SheetModal
+          data={showCurPosInformation ? curPosLocationInfo : locationInfo}
+          isModalOpen={isModalOpen}
+          setModalOpen={setModalOpen}
+          showCurPosInformation={showCurPosInformation}
+          setShowCurPosInformation={setShowCurPosInformation}
+        />
+      </Map>
+    </IonApp>
+  );
 };
 
 export default App;
