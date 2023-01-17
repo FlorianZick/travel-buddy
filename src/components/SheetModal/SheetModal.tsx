@@ -19,22 +19,19 @@ import Header from "./Header";
 import L from "leaflet";
 import { useMap } from "react-leaflet";
 import { getCurrentPosition } from "../RoutingMachine";
+import { ModalContext } from "../InformationContext/InformationContext";
 
 /**
  * Interface for props
  */
 interface Props {
   data: WikiApiDataModel[] | null;
-  isModalOpen: boolean;
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   showCurPosInformation: boolean;
   setShowCurPosInformation: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SheetModal: React.FC<Props> = ({
   data,
-  isModalOpen,
-  setModalOpen,
   showCurPosInformation,
   setShowCurPosInformation,
 }): React.ReactElement => {
@@ -45,6 +42,8 @@ const SheetModal: React.FC<Props> = ({
     const sheetModalDiv = document.getElementById("sheetModalDiv")!;
     L.DomEvent.disableClickPropagation(sheetModalDiv);
   });
+
+  const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
 
   return (
     <div id="sheetModalDiv">
@@ -57,7 +56,7 @@ const SheetModal: React.FC<Props> = ({
               map.flyTo(curPos, map.getZoom());
             }
             setShowCurPosInformation(true);
-            setModalOpen(true);
+            setIsModalOpen(true);
           }}
         >
           <IonIcon icon={locationOutline}></IonIcon>
@@ -72,7 +71,7 @@ const SheetModal: React.FC<Props> = ({
         ref={modal}
         isOpen={isModalOpen}
         onWillDismiss={() => {
-          setModalOpen(false);
+          setIsModalOpen(false);
         }}
         initialBreakpoint={0.5}
         breakpoints={[0, 0.15, 0.5, 1.0]}

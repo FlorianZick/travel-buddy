@@ -98,8 +98,6 @@ const App: React.FC = (): ReactElement => {
         />
         <SheetModal
           data={showCurPosInformation ? curPosInformationInfo : locationInfo}
-          isModalOpen={isModalOpen}
-          setModalOpen={setIsModalOpen}
           showCurPosInformation={showCurPosInformation}
           setShowCurPosInformation={setShowCurPosInformation}
         />
