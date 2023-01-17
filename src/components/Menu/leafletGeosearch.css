@@ -253,3 +253,21 @@
 .darkForm {
   filter: var(--map-tiles-filter, none);
 }
+
+/* Media query for screens smaller than 500px */
+@media only screen and (max-width: 500px) {
+  /* Changes the position of the search bar */
+  .leaflet-control-geosearch {
+    width: auto;
+    margin-right: 1rem;
+  }
+}
+
+/* Media query for screens smaller than 300px */
+@media only screen and (max-width: 300px) {
+  /* Changes the position of the search bar */
+  .leaflet-control-geosearch {
+    width: 60%;
+    margin-right: 1rem;
+  }
+}

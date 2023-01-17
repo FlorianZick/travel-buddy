@@ -8,3 +8,12 @@
   margin: auto;
   z-index: 1001;
 }
+
+/* Media query for screens smaller than 500px */
+@media only screen and (max-width: 500px) {
+  /* Changes the menuBtn position */
+  .menuBtn {
+    left: auto;
+    right: 0.5rem;
+  }
+}
