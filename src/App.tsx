@@ -43,7 +43,7 @@ setupIonicReact();
 const App: React.FC = (): ReactElement => {
   const { configs } = useContext(ConfigContext);
 
-  const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
+  const { setIsModalOpen } = useContext(ModalContext);
   const { locationInfo, setLocationInfo } = useContext(LocationInfoContext);
 
   const { curPosInformationInfo, setCurPosInformationInfo } =
@@ -54,16 +54,6 @@ const App: React.FC = (): ReactElement => {
   );
 
   const { i18n } = useTranslation();
-  // const [locationInfo, setLocationInfo] = useState<WikiApiDataModel[] | null>(
-  //   null
-  // );
-  //const [curPosLocationInfo, setCurPosLocationInfo] = useState<
-  //  WikiApiDataModel[] | null
-  //>(null);
-  //const [showCurPosInformation, setShowCurPosInformation] =
-  //  useState<boolean>(true);
-
-  // const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     i18n.changeLanguage(configs.language);

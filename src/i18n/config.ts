@@ -30,6 +30,6 @@ export const resources = {
 };
 
 i18next.use(initReactI18next).init({
-  lng: "English", // if you're using a language detector, do not define the lng option
+  lng: "English", // default language
   resources,
 });

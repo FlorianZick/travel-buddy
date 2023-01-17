@@ -7,6 +7,7 @@ import {
   ShowCurPosInformationState,
 } from "./types";
 
+// Default values for the context
 export const CurPosInfoDefault: CurPosInformationState = {
   curPosInformationInfo: null,
   setCurPosInformationInfo: () => undefined,
@@ -27,6 +28,7 @@ export const ShowCurPosInfoDefault: ShowCurPosInformationState = {
   setShowCurPosInformation: () => undefined,
 };
 
+// Create the contexts
 export const CurPosInfoContext =
   createContext<CurPosInformationState>(CurPosInfoDefault);
 
@@ -47,6 +49,11 @@ type ProviderPorps = {
   showCurPosInformation: boolean;
 };
 
+/**
+ * This context provides the information about the location and the App States, that is used in several components
+ * @param props: ProviderPorps
+ * @returns InformationProvider component
+ */
 const InformationsProvider: FC<ProviderPorps> = (props) => {
   const [curPosInformationInfo, setCurPosInformationInfo] = useState<
     WikiApiDataModel[] | null

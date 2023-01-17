@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { WikiApiDataModel } from "../../models/wikiApiDataModel";
 
 /**
- * State of information context
+ * States of information context
  */
 export type ModalContextState = {
   isModalOpen: boolean;
