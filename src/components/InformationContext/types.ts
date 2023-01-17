@@ -1,19 +1,25 @@
+import { Dispatch, SetStateAction } from "react";
 import { WikiApiDataModel } from "../../models/wikiApiDataModel";
 
 /**
  * State of information context
  */
-export type InformationContextState = {
-  informations: Information;
-  setInformations: (information: Information) => void;
+export type ModalContextState = {
+  isModalOpen: boolean;
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-/**
- * Model for information context
- */
-export type Information = {
-  isModalOpen: boolean;
+export type LocationContextState = {
   locationInfo: WikiApiDataModel[] | null;
+  setLocationInfo: Dispatch<SetStateAction<WikiApiDataModel[] | null>>;
+};
+
+export type CurPosInformationState = {
   curPosInformationInfo: WikiApiDataModel[] | null;
+  setCurPosInformationInfo: Dispatch<SetStateAction<WikiApiDataModel[] | null>>;
+};
+
+export type ShowCurPosInformationState = {
   showCurPosInformation: boolean;
+  setShowCurPosInformation: Dispatch<SetStateAction<boolean>>;
 };

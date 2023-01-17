@@ -19,7 +19,6 @@ import Header from "./Header";
 import L from "leaflet";
 import { useMap } from "react-leaflet";
 import { getCurrentPosition } from "../RoutingMachine";
-import { InformationContext } from "../InformationContext/InformationContext";
 
 /**
  * Interface for props

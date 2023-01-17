@@ -11,8 +11,9 @@ import {
   NavigatorApp,
   Theme,
 } from "./components/ConfigContext/types";
-import InformationsProvider from "./components/InformationContext/InformationContext";
-import { Information } from "./components/InformationContext/types";
+import InformationsProvider, {
+  CurPosInfoContext,
+} from "./components/InformationContext/InformationContext";
 
 /**
  * Enum for the component mode
@@ -72,19 +73,17 @@ const configData: Config = configStorageData
       navigator: NavigatorApp.GOOGLE_MAPS,
     };
 
-const informationData: Information = {
-  isModalOpen: false,
-  locationInfo: null,
-  curPosInformationInfo: null,
-  showCurPosInformation: true,
-};
-
 const container = document.getElementById("root");
 const root = createRoot(container!);
 root.render(
   // React strict mode will render twice in development phase, comment out to prevent this behaviour
   // <React.StrictMode>
-  <InformationsProvider information={informationData}>
+  <InformationsProvider
+    curPosInformationInfo={null}
+    isModalOpen={false}
+    locationInfo={null}
+    showCurPosInformation={false}
+  >
     <ConfigsProvider configJson={configData}>
       <App />
     </ConfigsProvider>

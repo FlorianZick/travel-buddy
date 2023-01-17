@@ -30,36 +30,40 @@ import { WikiApiDataModel } from "./models/wikiApiDataModel";
 import Menu from "./components/Menu/Menu";
 import { useTranslation } from "react-i18next";
 import { ConfigContext } from "./components/ConfigContext/ConfigContext";
-import { InformationContext } from "./components/InformationContext";
 import { Theme } from "./components/ConfigContext/types";
+import {
+  CurPosInfoContext,
+  LocationInfoContext,
+  ModalContext,
+  ShowCurPosInfoContext,
+} from "./components/InformationContext/InformationContext";
 
 setupIonicReact();
 
 const App: React.FC = (): ReactElement => {
   const { configs } = useContext(ConfigContext);
+
+  const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
+  const { locationInfo, setLocationInfo } = useContext(LocationInfoContext);
+
+  const { curPosInformationInfo, setCurPosInformationInfo } =
+    useContext(CurPosInfoContext);
+
+  const { showCurPosInformation, setShowCurPosInformation } = useContext(
+    ShowCurPosInfoContext
+  );
+
   const { i18n } = useTranslation();
-  const [locationInfo, setLocationInfo] = useState<WikiApiDataModel[] | null>(
-    null
-  );
-  const [curPosLocationInfo, setCurPosLocationInfo] = useState<
-    WikiApiDataModel[] | null
-  >(null);
-  const [showCurPosInformation, setShowCurPosInformation] =
-    useState<boolean>(true);
+  // const [locationInfo, setLocationInfo] = useState<WikiApiDataModel[] | null>(
+  //   null
+  // );
+  //const [curPosLocationInfo, setCurPosLocationInfo] = useState<
+  //  WikiApiDataModel[] | null
+  //>(null);
+  //const [showCurPosInformation, setShowCurPosInformation] =
+  //  useState<boolean>(true);
 
-  const { informations, setInformations } = useContext(InformationContext);
-  const [isModalOpen, setModalOpen] = useState<boolean>(
-    informations.isModalOpen
-  );
-
-  React.useEffect(() => {
-    setInformations({
-      isModalOpen: isModalOpen,
-      locationInfo: locationInfo,
-      curPosInformationInfo: curPosLocationInfo,
-      showCurPosInformation: showCurPosInformation,
-    });
-  }, [isModalOpen, locationInfo, curPosLocationInfo, showCurPosInformation]);
+  // const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     i18n.changeLanguage(configs.language);
@@ -82,20 +86,20 @@ const App: React.FC = (): ReactElement => {
     <IonApp>
       <Map
         onLocationChange={setLocationInfo}
-        onCurPosLocationChange={setCurPosLocationInfo}
-        setModalOpen={setModalOpen}
+        onCurPosLocationChange={setCurPosInformationInfo}
+        setModalOpen={setIsModalOpen}
         setShowCurPosInformation={setShowCurPosInformation}
       >
         <Menu
           onLocationChange={setLocationInfo}
-          onCurPosLocationChange={setCurPosLocationInfo}
-          setModalOpen={setModalOpen}
+          onCurPosLocationChange={setCurPosInformationInfo}
+          setModalOpen={setIsModalOpen}
           setShowCurPosInformation={setShowCurPosInformation}
         />
         <SheetModal
-          data={showCurPosInformation ? curPosLocationInfo : locationInfo}
+          data={showCurPosInformation ? curPosInformationInfo : locationInfo}
           isModalOpen={isModalOpen}
-          setModalOpen={setModalOpen}
+          setModalOpen={setIsModalOpen}
           showCurPosInformation={showCurPosInformation}
           setShowCurPosInformation={setShowCurPosInformation}
         />
