@@ -58,13 +58,10 @@ const InformationsProvider: FC<ProviderPorps> = (props) => {
   const [curPosInformationInfo, setCurPosInformationInfo] = useState<
     WikiApiDataModel[] | null
   >(props.curPosInformationInfo);
-
   const [locationInfo, setLocationInfo] = useState<WikiApiDataModel[] | null>(
     props.locationInfo
   );
-
   const [isModalOpen, setIsModalOpen] = useState<boolean>(props.isModalOpen);
-
   const [showCurPosInformation, setShowCurPosInformation] = useState<boolean>(
     props.showCurPosInformation
   );

@@ -8,7 +8,6 @@ import { reverseGeoEncoding } from "../api/reverseGeoEncoding";
 import { ConfigContext } from "./ConfigContext";
 import { useContext } from "react";
 import { Language, Theme } from "./ConfigContext/types";
-import { WikiApiDataModel } from "../models/wikiApiDataModel";
 import RoutingMachine, {
     getCurrentPosition,
     setCurrentPosition,
@@ -16,6 +15,12 @@ import RoutingMachine, {
 } from "./RoutingMachine";
 import SatelliteButton from "./SatelliteButton";
 import "./map.css";
+import {
+    CurPosInfoContext,
+    LocationInfoContext,
+    ModalContext,
+    ShowCurPosInfoContext,
+} from "./InformationContext/InformationContext";
 
 // Set correct icons for leaflet
 L.Icon.Default.mergeOptions({
@@ -28,14 +33,6 @@ L.Icon.Default.mergeOptions({
  * Interface for props
  */
 interface Props {
-    onLocationChange: React.Dispatch<
-        React.SetStateAction<WikiApiDataModel[] | null>
-    >;
-    onCurPosLocationChange: React.Dispatch<
-        React.SetStateAction<WikiApiDataModel[] | null>
-    >;
-    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    setShowCurPosInformation: React.Dispatch<React.SetStateAction<boolean>>;
     children?: React.ReactNode;
 }
 
@@ -43,7 +40,10 @@ function LocationMarker(props: Props) {
     const { configs } = useContext(ConfigContext);
     const map = useMap();
     const { t } = useTranslation();
-
+    const { setIsModalOpen } = useContext(ModalContext);
+    const { setShowCurPosInformation } = useContext(ShowCurPosInfoContext);
+    const { setCurPosInformationInfo } = useContext(CurPosInfoContext);
+    const { setLocationInfo } = useContext(LocationInfoContext);
     React.useEffect(() => {
         // On every language change, remove the old event listeners and add new ones
         // Callbacks needs to be changed, to make sure the new language is used in the fetchWikiApi call
@@ -60,7 +60,7 @@ function LocationMarker(props: Props) {
             map.flyTo(e.latlng, map.getZoom());
             loadLocationData(
                 e.latlng,
-                props.onCurPosLocationChange,
+                setCurPosInformationInfo,
                 configs.language
             ).then(() => {
                 // props.setModalOpen(true);
@@ -76,11 +76,11 @@ function LocationMarker(props: Props) {
             map.flyTo(e.latlng, map.getZoom());
             loadLocationData(
                 e.latlng,
-                curPos ? props.onLocationChange : props.onCurPosLocationChange,
+                curPos ? setLocationInfo : setCurPosInformationInfo,
                 configs.language
             ).then(() => {
-                props.setShowCurPosInformation(curPos ? false : true);
-                props.setModalOpen(true);
+                setShowCurPosInformation(curPos ? false : true);
+                setIsModalOpen(true);
             });
         },
         [configs.language]
@@ -137,13 +137,7 @@ async function getElementByClassNameAsync(className: string): Promise<Element> {
     });
 }
 
-const Map: React.FC<Props> = ({
-    onLocationChange,
-    onCurPosLocationChange,
-    setModalOpen,
-    setShowCurPosInformation,
-    children,
-}): React.ReactElement => {
+const Map: React.FC<Props> = ({ children }): React.ReactElement => {
     const [isSatellite, setIsSatellite] = React.useState(false);
     const { configs } = useContext(ConfigContext);
     async function changeThemeFilter(darkMap: boolean, darkTheme: boolean) {
@@ -193,12 +187,7 @@ const Map: React.FC<Props> = ({
                 isSatellite={isSatellite}
                 setIsSatellite={setIsSatellite}
             />
-            <LocationMarker
-                onLocationChange={onLocationChange}
-                onCurPosLocationChange={onCurPosLocationChange}
-                setModalOpen={setModalOpen}
-                setShowCurPosInformation={setShowCurPosInformation}
-            />
+            <LocationMarker />
             <RoutingMachine />
         </MapContainer>
     );
