@@ -1,4 +1,4 @@
-import { createContext, useState, FC, ReactElement, useEffect } from "react";
+import { createContext, useState, FC, ReactElement } from "react";
 import { WikiApiDataModel } from "../../models/wikiApiDataModel";
 import {
   CurPosInformationState,

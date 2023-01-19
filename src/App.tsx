@@ -33,35 +33,36 @@ import { Theme } from "./components/ConfigContext/types";
 
 setupIonicReact();
 
+/**
+ * Main component of the app
+ */
 const App: React.FC = (): ReactElement => {
-    const { configs } = useContext(ConfigContext);
-    const { i18n } = useTranslation();
-    useEffect(() => {
-        i18n.changeLanguage(configs.language);
-    }, []);
+  const { configs } = useContext(ConfigContext);
+  const { i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(configs.language);
+  }, []);
 
-    useEffect(() => {
-        const theme = configs.theme;
+  useEffect(() => {
+    const theme = configs.theme;
 
-        if (theme === Theme.LIGHT) {
-            document.body.classList.toggle("dark", false);
-        } else if (theme === Theme.DARK) {
-            document.body.classList.toggle("dark", true);
-        } else if (theme === Theme.SYSTEM_SETTING) {
-            const prefersDark = window.matchMedia(
-                "(prefers-color-scheme: dark)"
-            );
-            document.body.classList.toggle("dark", prefersDark.matches);
-        }
-    });
-    return (
-        <IonApp>
-            <Map>
-                <Menu />
-                <SheetModal />
-            </Map>
-        </IonApp>
-    );
+    if (theme === Theme.LIGHT) {
+      document.body.classList.toggle("dark", false);
+    } else if (theme === Theme.DARK) {
+      document.body.classList.toggle("dark", true);
+    } else if (theme === Theme.SYSTEM_SETTING) {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+      document.body.classList.toggle("dark", prefersDark.matches);
+    }
+  });
+  return (
+    <IonApp>
+      <Map>
+        <Menu />
+        <SheetModal />
+      </Map>
+    </IonApp>
+  );
 };
 
 export default App;

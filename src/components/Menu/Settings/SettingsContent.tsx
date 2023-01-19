@@ -9,15 +9,15 @@ import NavigatorAppSetting from "./NavigatorAppSetting";
  * @returns Settings content component
  */
 const SettingsContent: React.FC = (): ReactElement => {
-    return (
-        <IonContent className="ion-padding">
-            <IonList inset={true}>
-                <DarkModeSetting />
-                <LanguageSetting />
-                <NavigatorAppSetting />
-            </IonList>
-        </IonContent>
-    );
+  return (
+    <IonContent className="ion-padding">
+      <IonList inset={true}>
+        <DarkModeSetting />
+        <LanguageSetting />
+        <NavigatorAppSetting />
+      </IonList>
+    </IonContent>
+  );
 };
 
 export default SettingsContent;

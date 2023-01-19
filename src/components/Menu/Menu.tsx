@@ -9,18 +9,22 @@ import { SearchField } from "./SearchField";
  * Interface for props
  */
 interface Props {
-    apiKey?: string;
+  apiKey?: string;
 }
 
+/**
+ * Menu component
+ * @param apiKey - API key for geocoding
+ */
 const Menu: React.FC<Props> = ({ apiKey }): ReactElement => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-    return (
-        <div>
-            <SearchField apiKey={apiKey} />
-            <MenuButton setIsOpen={setIsOpen} />
-            <Settings isOpen={isOpen} setIsOpen={setIsOpen} />
-        </div>
-    );
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  return (
+    <div>
+      <SearchField apiKey={apiKey} />
+      <MenuButton setIsOpen={setIsOpen} />
+      <Settings isOpen={isOpen} setIsOpen={setIsOpen} />
+    </div>
+  );
 };
 
 export default Menu;
