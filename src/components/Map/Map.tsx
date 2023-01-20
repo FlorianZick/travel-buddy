@@ -2,12 +2,14 @@ import * as React from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer } from "react-leaflet";
 import L from "leaflet";
-import { ConfigContext } from "./ConfigContext";
+import { ConfigContext } from "../ConfigContext/ConfigContext";
 import { useContext } from "react";
-import { Theme } from "./ConfigContext/types";
-import RoutingMachine from "./RoutingMachine";
-import SatelliteButton from "./SatelliteButton";
+
+import RoutingMachine from "../RoutingMachine";
+import SatelliteButton from "./SatelliteButton/SatelliteButton";
 import "./map.css";
+
+import { Theme } from "../ConfigContext/types";
 import LocationMarker from "./locationMarker";
 
 // Set correct icons for leaflet

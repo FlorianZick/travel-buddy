@@ -9,9 +9,9 @@ import {
   IonText,
 } from "@ionic/react";
 import { navigateCircleOutline } from "ionicons/icons";
-import { exportRoute } from "../RoutingMachine";
+import { exportRoute } from "../../RoutingMachine";
 import { useContext } from "react";
-import { ConfigContext } from "../ConfigContext";
+import { ConfigContext } from "../../ConfigContext";
 
 /**
  * Props for the header component

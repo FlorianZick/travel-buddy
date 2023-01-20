@@ -3,17 +3,20 @@ import { OpenStreetMapProvider, GeoSearchControl } from "leaflet-geosearch";
 import React, { useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useMap } from "react-leaflet";
-import { getLanguageCode, fetchWikiData } from "../../api/fetchWikiData";
-import { reverseGeoEncoding } from "../../api/reverseGeoEncoding";
-import { Language } from "../ConfigContext/types";
-import { getCurrentPosition, setDestinationPosition } from "../RoutingMachine";
+import { getLanguageCode, fetchWikiData } from "../../../api/fetchWikiData";
+import { reverseGeoEncoding } from "../../../api/reverseGeoEncoding";
+import { Language } from "../../ConfigContext/types";
+import {
+  getCurrentPosition,
+  setDestinationPosition,
+} from "../../RoutingMachine";
 import {
   CurPosInfoContext,
   LocationInfoContext,
   ModalContext,
   ShowCurPosInfoContext,
-} from "../InformationContext/InformationContext";
-import { ConfigContext } from "../ConfigContext";
+} from "../../InformationContext/InformationContext";
+import { ConfigContext } from "../../ConfigContext";
 
 type SearchFieldProps = {
   apiKey: string | undefined;

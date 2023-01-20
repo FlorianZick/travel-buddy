@@ -1,9 +1,9 @@
 import React, { ReactElement, useState } from "react";
 import Settings from "./Settings/Settings";
-import MenuButton from "./MenuButton";
+import MenuButton from "./MenuButton/MenuButton";
 import "./menu.css";
-import "./leafletGeosearch.css";
-import { SearchField } from "./SearchField";
+import "./SearchField/leafletGeosearch.css";
+import { SearchField } from "./SearchField/SearchField";
 
 /**
  * Props for the menu component

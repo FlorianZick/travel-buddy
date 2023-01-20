@@ -1,6 +1,6 @@
 import { IonApp, setupIonicReact } from "@ionic/react";
 
-import Map from "./components/Map";
+import Map from "./components/Map/Map";
 import SheetModal from "./components/SheetModal/SheetModal";
 
 /* Core CSS required for Ionic components to work properly */

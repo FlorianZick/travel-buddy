@@ -13,8 +13,8 @@ import {
 import { locationOutline } from "ionicons/icons";
 import "typeface-roboto";
 import "./sheetModal.css";
-import EventCard from "../EventCard";
-import Header from "./Header";
+import EventCard from "./Elements/EventCard";
+import Header from "./Elements/Header";
 import L from "leaflet";
 import { useMap } from "react-leaflet";
 import { getCurrentPosition } from "../RoutingMachine";

@@ -3,23 +3,23 @@ import "leaflet/dist/leaflet.css";
 import { useMap } from "react-leaflet";
 import { LatLng } from "leaflet";
 import { useTranslation } from "react-i18next";
-import { fetchWikiData } from "../api/fetchWikiData";
-import { reverseGeoEncoding } from "../api/reverseGeoEncoding";
-import { ConfigContext } from "./ConfigContext";
+import { fetchWikiData } from "../../api/fetchWikiData";
+import { reverseGeoEncoding } from "../../api/reverseGeoEncoding";
+import { ConfigContext } from "../ConfigContext";
 import { useContext } from "react";
-import { Language } from "./ConfigContext/types";
+import { Language } from "../ConfigContext/types";
 import {
   getCurrentPosition,
   setCurrentPosition,
   setDestinationPosition,
-} from "./RoutingMachine";
+} from "../RoutingMachine";
 import "./map.css";
 import {
   CurPosInfoContext,
   LocationInfoContext,
   ModalContext,
   ShowCurPosInfoContext,
-} from "./InformationContext/InformationContext";
+} from "../InformationContext/InformationContext";
 
 /**
  * Location Marker component
