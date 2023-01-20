@@ -13,10 +13,12 @@ export async function reverseGeoEncoding(
   // Coordinate types: node(N), way(W), relation(R).
   let url: string = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
   let addressResult: NominatimAddressModel = {} as NominatimAddressModel;
+
   // fetch data from nominatim API
   await fetch(url)
     // convert response to json
     .then((response: Response) => response.json())
+
     // extract data
     .then((response) => {
       // catch error
@@ -26,10 +28,12 @@ export async function reverseGeoEncoding(
       }
       // save data
       let addressResponse = response.address;
+
       // leaflet differs between city town and village
       let cityTag = "city";
       cityTag = addressResponse.hasOwnProperty("town") ? "town" : cityTag;
       cityTag = addressResponse.hasOwnProperty("village") ? "village" : cityTag;
+
       addressResult = {
         road: addressResponse["road"],
         postcode: addressResponse["postcode"],

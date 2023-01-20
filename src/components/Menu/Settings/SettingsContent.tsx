@@ -5,7 +5,7 @@ import LanguageSetting from "./LanguageSetting";
 import NavigatorAppSetting from "./NavigatorAppSetting";
 
 /**
- * Functional component for settings content
+ * Functional component, scaffholds the settings
  * @returns Settings content component
  */
 const SettingsContent: React.FC = (): ReactElement => {

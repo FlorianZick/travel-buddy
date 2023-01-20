@@ -30,25 +30,29 @@ export const ConfigContext =
 /**
  * Props types for context
  */
-type ProviderPorps = {
+type ConfigsProviderProps = {
   configJson: Config;
   children: ReactElement;
 };
 
 /**
  * Provider for config context
- * @param props Props
+ * @param configJson Config json
+ * @param children Children
  * @returns Config context
  */
-const ConfigsProvider: FC<ProviderPorps> = (props: ProviderPorps) => {
-  const [configs, setConfigs] = useState<Config>(props.configJson);
+const ConfigsProvider: FC<ConfigsProviderProps> = ({
+  configJson,
+  children,
+}: ConfigsProviderProps) => {
+  const [configs, setConfigs] = useState<Config>(configJson);
   useEffect(() => {
     // write to local storage
     localStorage.setItem("configs", JSON.stringify(configs));
   }, [configs]);
   return (
     <ConfigContext.Provider value={{ configs, setConfigs }}>
-      {props.children}
+      {children}
     </ConfigContext.Provider>
   );
 };

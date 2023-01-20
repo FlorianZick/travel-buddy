@@ -22,7 +22,7 @@ L.Icon.Default.mergeOptions({
  * @param configs config context
  * @returns is dark
  */
-function checkThemeDark(configs: any) {
+function checkThemeDark(configs: any): boolean {
   let isDark = false;
   if (configs.theme === Theme.DARK) {
     isDark = true;
@@ -54,16 +54,42 @@ async function getElementByClassNameAsync(className: string): Promise<Element> {
 }
 
 /**
- * Interface for props
+ * Props for the map component
  */
-interface Props {
+type MapProps = {
   children?: React.ReactNode;
-}
+};
 
-const Map: React.FC<Props> = ({ children }): React.ReactElement => {
+/**
+ * Functional component for map
+ * @param children - Children of the map
+ * @returns Map component
+ */
+const Map: React.FC<MapProps> = ({
+  children,
+}: MapProps): React.ReactElement => {
   const [isSatellite, setIsSatellite] = React.useState(false);
+
   const { configs } = useContext(ConfigContext);
-  async function changeThemeFilter(darkMap: boolean, darkTheme: boolean) {
+
+  React.useEffect(() => {
+    let darkMap = false;
+    let darkTheme = checkThemeDark(configs);
+    if (!isSatellite) {
+      darkMap = darkTheme;
+    }
+    changeThemeFilter(darkMap, darkTheme);
+  }, [configs, isSatellite]);
+
+  /**
+   * Change theme filter
+   * @param darkMap is map dark
+   * @param darkTheme is theme dark
+   */
+  async function changeThemeFilter(
+    darkMap: boolean,
+    darkTheme: boolean
+  ): Promise<void> {
     await getElementByClassNameAsync("leaflet-layer mapTiles").then(
       (tilesRef) => {
         if (tilesRef) {
@@ -77,14 +103,6 @@ const Map: React.FC<Props> = ({ children }): React.ReactElement => {
       ?.classList.toggle("darkTheme", darkTheme);
   }
 
-  React.useEffect(() => {
-    let darkMap = false;
-    let darkTheme = checkThemeDark(configs);
-    if (!isSatellite) {
-      darkMap = darkTheme;
-    }
-    changeThemeFilter(darkMap, darkTheme);
-  }, [configs, isSatellite]);
   return (
     <MapContainer
       center={{ lat: 51.166, lng: 10.452 }}

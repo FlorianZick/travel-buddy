@@ -6,18 +6,19 @@ import "./leafletGeosearch.css";
 import { SearchField } from "./SearchField";
 
 /**
- * Interface for props
+ * Props for the menu component
  */
-interface Props {
+type MenuProps = {
   apiKey?: string;
-}
+};
 
 /**
  * Menu component
  * @param apiKey - API key for geocoding
  */
-const Menu: React.FC<Props> = ({ apiKey }): ReactElement => {
+const Menu: React.FC<MenuProps> = ({ apiKey }: MenuProps): ReactElement => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   return (
     <div>
       <SearchField apiKey={apiKey} />

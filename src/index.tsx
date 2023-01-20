@@ -62,6 +62,7 @@ setupIonicReact({
 // read config data from local storage
 const configStorageData = localStorage.getItem("configs");
 
+// set config data from local storage, if no data is found, set default values
 const configData: Config = configStorageData
   ? JSON.parse(configStorageData)
   : {

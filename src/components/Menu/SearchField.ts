@@ -15,10 +15,14 @@ import {
 } from "../InformationContext/InformationContext";
 import { ConfigContext } from "../ConfigContext";
 
+type SearchFieldProps = {
+  apiKey: string | undefined;
+};
+
 /**
  * SearchField component for the map
  */
-export const SearchField = ({ apiKey }: { apiKey: any }) => {
+export const SearchField = ({ apiKey }: SearchFieldProps): null => {
   const { t } = useTranslation();
   const { configs } = useContext(ConfigContext);
   const { setIsModalOpen } = useContext(ModalContext);
@@ -26,7 +30,12 @@ export const SearchField = ({ apiKey }: { apiKey: any }) => {
   const { setCurPosInformationInfo } = useContext(CurPosInfoContext);
   const { setLocationInfo } = useContext(LocationInfoContext);
   const [lastControl, setLastControl] = useState<any>(null);
-  const mapShowlocationCallback = (res: any) => {
+
+  /**
+   * Flies to the destination location and loads the information about the location
+   * @param res information about the destination location
+   */
+  const mapShowlocationCallback = (res: any): void => {
     const curPos = getCurrentPosition();
     setDestinationPosition({ lat: res.location.y, lng: res.location.x });
     map.flyTo({ lat: res.location.y, lng: res.location.x }, map.getZoom());
@@ -41,17 +50,17 @@ export const SearchField = ({ apiKey }: { apiKey: any }) => {
       setShowCurPosInformation(curPos ? false : true);
       setIsModalOpen(true);
     });
-    // console.log(res.location);
   };
 
   const map = useMap();
+
   React.useEffect(() => {
     if (lastControl) {
       map.removeControl(lastControl);
     }
     const provider = new OpenStreetMapProvider({
       params: {
-        access_token: apiKey,
+        access_token: apiKey!,
         "accept-language": getLanguageCode(configs.language),
       },
     });
@@ -65,17 +74,25 @@ export const SearchField = ({ apiKey }: { apiKey: any }) => {
       notFoundMessage: t("errors.noSearchResult"),
       updateMap: false,
     });
+
     setLastControl(searchControl);
     map.addControl(searchControl);
     map.removeEventListener("geosearch/showlocation");
     map.on("geosearch/showlocation", mapShowlocationCallback);
+    // eslint-disable-next-line
   }, [configs.language]);
 
+  /**
+   * Loads the information about the location
+   * @param location location to load the information about
+   * @param setWikiData function to set the information about the location
+   * @param lang language of the information
+   */
   async function loadLocationData(
     location: LatLng,
     setWikiData: any,
     lang: Language
-  ) {
+  ): Promise<void> {
     const locationData = await reverseGeoEncoding(location.lat, location.lng);
     const wikiData = await fetchWikiData(t, locationData.city, lang);
     setWikiData(wikiData);

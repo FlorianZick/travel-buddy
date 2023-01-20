@@ -39,10 +39,13 @@ setupIonicReact();
 const App: React.FC = (): ReactElement => {
   const { configs } = useContext(ConfigContext);
   const { i18n } = useTranslation();
+
   useEffect(() => {
     i18n.changeLanguage(configs.language);
+    // eslint-disable-next-line
   }, []);
 
+  // Set theme
   useEffect(() => {
     const theme = configs.theme;
 
@@ -55,6 +58,7 @@ const App: React.FC = (): ReactElement => {
       document.body.classList.toggle("dark", prefersDark.matches);
     }
   });
+
   return (
     <IonApp>
       <Map>

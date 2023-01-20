@@ -37,16 +37,20 @@ const SheetModal: React.FC = (): React.ReactElement => {
   const { curPosInformationInfo } = useContext(CurPosInfoContext);
   const { locationInfo } = useContext(LocationInfoContext);
   const [data, setData] = useState<WikiApiDataModel[] | null>(null);
+
   useEffect(() => {
     setData(showCurPosInformation ? curPosInformationInfo : locationInfo);
   }, [showCurPosInformation, curPosInformationInfo, locationInfo]);
+
   const map = useMap();
   const modal = React.useRef(null);
+
   // Prevent map click propagation when clicking on sheet modal
   React.useEffect(() => {
     const sheetModalDiv = document.getElementById("sheetModalDiv")!;
     L.DomEvent.disableClickPropagation(sheetModalDiv);
   });
+
   return (
     <div id="sheetModalDiv">
       <IonFab slot="fixed" class="infoBtn">
