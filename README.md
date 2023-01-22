@@ -22,10 +22,10 @@ https://webeng2.atlassian.net/jira/software/projects/WEB/boards/1/backlog
 
 ## Installationsanleitung
 
-- Repository klonen mit dem Befehl: git clone https://github.com/FlorianZick/travel-buddy.git
+- Repository klonen mit dem Befehl: `git clone https://github.com/FlorianZick/travel-buddy.git`
 
-- In das richtige Verzeichnis navigieren mit: cd src
+- In das richtige Verzeichnis navigieren mit: `cd src`
 
-- Benötigte Module herunterladen mit: npm i
+- Benötigte Module herunterladen mit: `npm i`
 
-- Anwendung starten mit: npm start
+- Anwendung starten mit: `npm start`
