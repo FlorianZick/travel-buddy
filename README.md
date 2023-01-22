@@ -34,5 +34,5 @@ Die [Travel Buddy Web-App](https://travel-buddy-florianzick.vercel.app/) wurde i
 -   sinnvolle englische Commit-Messages
 -   Wenn fertig:
     -   Quellcode autoformatieren, kommentieren, dann pushen
-    -   Branch in Main Mergen und Pushen. Bei Unsicherheiten Pull Request für Code Review erstellen
+    -   Branch in Master mergen und pushen. Bei Unsicherheiten Pull Request für Code Review erstellen
     -   Direkt verschieben der Story auf Done
