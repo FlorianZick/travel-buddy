@@ -2,7 +2,7 @@
 
 ## Beschreibung
 
-Die Travel Buddy App wurde im Rahmen des Software Engineering 2 Vorlesung erstellt. Die PWA kann Informationen zu Örtlichkeiten anzeigen.
+Die [Travel Buddy Web-App](https://travel-buddy-florianzick.vercel.app/) wurde im Rahmen der Web Engineering 2 Vorlesung erstellt. Die PWA kann Informationen zu Örtlichkeiten anzeigen.
 
 ## Installationsanleitung
 
@@ -10,20 +10,17 @@ Die Travel Buddy App wurde im Rahmen des Software Engineering 2 Vorlesung erstel
    `git clone https://github.com/FlorianZick/travel-buddy.git`
 
 2. In Verzeichnis navigieren:
-   `cd travel-buddy `
+   `cd travel-buddy`
 
-3. Benötigte Module herunterladen:
+3. Module herunterladen:
    `npm i`
 
-4. Webapp starten:
+4. Web-App starten:
    `npm start`
 
-5. Webapp ist unter folgender URL erreichbar:
-   `http://localhost:3000/`
+5. [Web-App](http://localhost:3000/) aufrufen
 
-## Agiles Board Jira
-
-https://webeng2.atlassian.net/jira/software/projects/WEB/boards/1/backlog
+## [Agiles Board Jira](https://webeng2.atlassian.net/jira/software/projects/WEB/boards/1/backlog)
 
 ## Vorgaben zur Zusammenarbeit
 
