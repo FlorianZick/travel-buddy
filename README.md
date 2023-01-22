@@ -1,4 +1,4 @@
-# travel-buddy
+# Travel Buddy
 
 ## Beschreibung
 
