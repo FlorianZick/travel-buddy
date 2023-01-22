@@ -36,3 +36,6 @@ Die [Travel Buddy Web-App](https://travel-buddy-florianzick.vercel.app/) wurde i
     -   Quellcode autoformatieren, kommentieren, dann pushen
     -   Branch in Master mergen und pushen. Bei Unsicherheiten Pull Request für Code Review erstellen
     -   Direkt verschieben der Story auf Done
+ 
+## Autoren
+Florian Zick, Mark Oelmaier, Lukas Lutz, Julian Pfeiffer, Maximilian Bucher, Steffen Freitag, Marvin Franke
