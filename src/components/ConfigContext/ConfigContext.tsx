@@ -1,38 +1,38 @@
 import { createContext, useState, FC, ReactElement, useEffect } from "react";
 import {
-  Config,
-  ConfigContextState,
-  DeviceType,
-  Language,
-  NavigatorApp,
-  Theme,
+    Config,
+    ConfigContextState,
+    DeviceType,
+    Language,
+    NavigatorApp,
+    Theme,
 } from "./types";
 
 /**
  * Default values for context
  */
 const contextDefaultValues: ConfigContextState = {
-  configs: {
-    theme: Theme.DARK,
-    device: DeviceType.MOBILE,
-    language: Language.EN,
-    navigator: NavigatorApp.GOOGLE_MAPS,
-  },
-  setConfigs: () => undefined,
+    configs: {
+        theme: Theme.DARK,
+        device: DeviceType.MOBILE,
+        language: Language.DE,
+        navigator: NavigatorApp.GOOGLE_MAPS,
+    },
+    setConfigs: () => undefined,
 };
 
 /**
  * Config context
  */
 export const ConfigContext =
-  createContext<ConfigContextState>(contextDefaultValues);
+    createContext<ConfigContextState>(contextDefaultValues);
 
 /**
  * Props types for context
  */
 type ConfigsProviderProps = {
-  configJson: Config;
-  children: ReactElement;
+    configJson: Config;
+    children: ReactElement;
 };
 
 /**
@@ -42,19 +42,19 @@ type ConfigsProviderProps = {
  * @returns Config context
  */
 const ConfigsProvider: FC<ConfigsProviderProps> = ({
-  configJson,
-  children,
+    configJson,
+    children,
 }: ConfigsProviderProps) => {
-  const [configs, setConfigs] = useState<Config>(configJson);
-  useEffect(() => {
-    // write to local storage
-    localStorage.setItem("configs", JSON.stringify(configs));
-  }, [configs]);
-  return (
-    <ConfigContext.Provider value={{ configs, setConfigs }}>
-      {children}
-    </ConfigContext.Provider>
-  );
+    const [configs, setConfigs] = useState<Config>(configJson);
+    useEffect(() => {
+        // write to local storage
+        localStorage.setItem("configs", JSON.stringify(configs));
+    }, [configs]);
+    return (
+        <ConfigContext.Provider value={{ configs, setConfigs }}>
+            {children}
+        </ConfigContext.Provider>
+    );
 };
 
 export default ConfigsProvider;

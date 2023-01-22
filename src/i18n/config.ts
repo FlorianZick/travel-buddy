@@ -9,27 +9,27 @@ import ptTrans from "./pt/translation.json";
 
 // languaes names need to be the same in the i18next config and the configcontext language list
 export const resources = {
-  English: {
-    translation: enTrans,
-  },
-  German: {
-    translation: deTrans,
-  },
-  French: {
-    translation: frTrans,
-  },
-  Spanish: {
-    translation: esTrans,
-  },
-  Italian: {
-    translation: itTrans,
-  },
-  Portuguese: {
-    translation: ptTrans,
-  },
+    English: {
+        translation: enTrans,
+    },
+    German: {
+        translation: deTrans,
+    },
+    French: {
+        translation: frTrans,
+    },
+    Spanish: {
+        translation: esTrans,
+    },
+    Italian: {
+        translation: itTrans,
+    },
+    Portuguese: {
+        translation: ptTrans,
+    },
 };
 
 i18next.use(initReactI18next).init({
-  lng: "English", // default language
-  resources,
+    lng: "German", // default language
+    resources,
 });
