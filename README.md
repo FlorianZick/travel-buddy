@@ -38,4 +38,4 @@ Die [Travel Buddy Web-App](https://travel-buddy-florianzick.vercel.app/) wurde i
     -   Direkt verschieben der Story auf Done
  
 ## Autoren
-Florian Zick, Mark Oelmaier, Lukas Lutz, Julian Pfeiffer, Maximilian Bucher, Steffen Freitag, Marvin Franke
+Florian Zick, Mark Oelmaier, Lukas Lutz, Julian Pfeiffer, Maximilian Bucher, Miriam Astor, Steffen Freitag, Marvin Franke
