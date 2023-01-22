@@ -1,5 +1,7 @@
 # travel-buddy
+
 ## Beschreibung
+
 Die Travel Buddy App wurde im Rahmen des Software Engineering 2 Vorlesung erstellt. Die PWA kann Informationen zu Örtlichkeiten anzeigen
 
 ## Installationsanleitung
@@ -12,7 +14,7 @@ Die Travel Buddy App wurde im Rahmen des Software Engineering 2 Vorlesung erstel
 
 - Anwendung starten mit: `npm start`
 
-##Agiles Board Jira
+## Agiles Board Jira
 
 https://webeng2.atlassian.net/jira/software/projects/WEB/boards/1/backlog
 
